@@ -34,7 +34,5 @@ public class Producto {
     public String getDescripcion() {
         return descripcion;
     }
-
-    
-    
+   
 }

@@ -1,49 +1,72 @@
 package modelo;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
-public class Hash {
-    
-    private int[] hashMap = new int[10];
-    
-    public int transformarFecha(String fecha){
-        
-        int dia, mes, año, hora, minuto, fechaDef = 0;
-        Calendar calendario = Calendar.getInstance();
-        
-        try{
-            
-            Date f = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(fecha);
-            calendario.setTime(f);
-            
-            dia = calendario.get(Calendar.DAY_OF_MONTH);
-            mes = calendario.get(Calendar.MONTH)+1;
-            año = calendario.get(Calendar.YEAR);
-            hora = calendario.get(Calendar.HOUR);
-            minuto = calendario.get(Calendar.MINUTE);
-            
-            fechaDef = dia+mes+año+hora+minuto;
-            
-            
-            
-        }catch(Exception SimpleDateFormat){
-            JOptionPane.showMessageDialog(null,"Error del formato en la fecha");
+class Hash<K, V> {
+    private final ArrayList<ArrayList<Entrada<K, V>>> buckets; // Lista de listas para los "buckets"
+    private static final int CAPACIDAD_POR_DEFECTO = 16; // Capacidad inicial por defecto
+
+    public Hash() {
+        buckets = new ArrayList<>(CAPACIDAD_POR_DEFECTO); // Inicializa el array de buckets con la capacidad por defecto
+        for (int i = 0; i < CAPACIDAD_POR_DEFECTO; i++) {
+            buckets.add(new ArrayList<>()); // Inicializa cada bucket con una lista vacía
         }
-        
-        return fechaDef;
     }
-    
-    
-    public void crearHash(int idComprador, int idVendedor,int idTransaccion, int idProducto, String fecha){
-        
-        int hash = idComprador + idVendedor + idTransaccion + idProducto + transformarFecha(fecha);
-        
-        hashMap[hash%hashMap.length] = hash;
+
+    // Método para agregar una entrada al mapa
+    public void poner(K clave, V valor) {
+        int indice = obtenerIndice(clave); // Obtiene el índice del bucket
+        for (Entrada<K, V> entrada : buckets.get(indice)) { // Recorre las entradas en el bucket
+            if (entrada.obtenerClave().equals(clave)) { // Si la clave ya existe, actualiza el valor
+                entrada.establecerValor(valor);
+                return;
+            }
+        }
+        buckets.get(indice).add(new Entrada<>(clave, valor)); // Si la clave no existe, agrega una nueva entrada al bucket
     }
-    
-    
-    
+
+    // Método para obtener el valor asociado a una clave
+    public V obtener(K clave) {
+        int indice = obtenerIndice(clave); // Obtiene el índice del bucket
+        for (Entrada<K, V> entrada : buckets.get(indice)) { // Recorre las entradas en el bucket
+            if (entrada.obtenerClave().equals(clave)) { // Si encuentra la clave, retorna el valor asociado
+                return entrada.obtenerValor();
+            }
+        }
+        return null; // Si la clave no existe, retorna null
+    }
+
+    // Método para eliminar una entrada del mapa
+    public void eliminar(K clave) {
+        int indice = obtenerIndice(clave); // Obtiene el índice del bucket
+        buckets.get(indice).removeIf(entrada -> entrada.obtenerClave().equals(clave)); // Elimina la entrada con la clave dada
+    }
+
+    // Método para obtener el índice del bucket usando el hash de la clave
+    private int obtenerIndice(K clave) {
+        return Math.abs(clave.hashCode() % CAPACIDAD_POR_DEFECTO); // Utiliza el hash de la clave para calcular el índice
+    }
+
+    // Clase interna que representa una entrada en el mapa
+    private static class Entrada<K, V> {
+        private final K clave;
+        private V valor;
+
+        public Entrada(K clave, V valor) {
+            this.clave = clave;
+            this.valor = valor;
+        }
+
+        public K obtenerClave() {
+            return clave;
+        }
+
+        public V obtenerValor() {
+            return valor;
+        }
+
+        public void establecerValor(V valor) {
+            this.valor = valor;
+        }
+    }
 }
