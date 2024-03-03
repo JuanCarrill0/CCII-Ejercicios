@@ -4,6 +4,8 @@
  */
 package Modelo;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author juanc
@@ -14,7 +16,7 @@ package Modelo;
 
 public class arbolBinario<T> {
     // Clase interna para representar un nodo del árbol
-    private class Nodo {
+    public class Nodo {
         T dato;
         Nodo izquierdo;
         Nodo derecho;
@@ -25,9 +27,38 @@ public class arbolBinario<T> {
             izquierdo = null;
             derecho = null;
         }
+        
+        public T getDato() {
+            return dato;
+        }
+
+        public void setDato(T dato) {
+            this.dato = dato;
+        }
+
+        public Nodo getIzq() {
+            return izquierdo;
+        }
+
+        public void setIzq(Nodo izq) {
+            this.izquierdo = izq;
+        }
+        
+        public Nodo getDer() {
+            return derecho;
+        }
+
+        public void setDer(Nodo der) {
+            this.derecho = der;
+        }
+        
     }
 
     private Nodo raiz; // Raíz del árbol
+    
+    public Nodo getRaiz(){
+        return raiz;
+    }
 
     // Constructor de la clase ArbolBinario
     public arbolBinario() {
@@ -171,5 +202,9 @@ public class arbolBinario<T> {
 
             return Math.max(izquierdaAltura, derechaAltura) + 1;
         }
+    }
+    
+    public JPanel getDibujo(){
+        return new arbolGrafico(this);
     }
 }

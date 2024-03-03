@@ -10,9 +10,13 @@ package Modelo;
  */
 import java.util.Arrays;
 import java.util.Stack;
+import javax.swing.JOptionPane;
 
 // Clase CalculadoraPolaca para evaluar expresiones en notación polaca
 public class calculadoraPolaca {
+    
+    public Stack<Double> operandos = new Stack<>();
+    
     private arbolBinario<String> arbol;
 
     // Constructor de la clase CalculadoraPolaca
@@ -24,29 +28,34 @@ public class calculadoraPolaca {
     public int evaluarExpresion(String expresion) {
         // Dividir la expresión en tokens separados por saltos de línea
         String[] lineas = expresion.split("\\r?\\n");
+        
+        // Verificar si hay al menos tres líneas
+        if (lineas.length < 3) {
+            JOptionPane.showMessageDialog(null, "Operación invalida, deben existir mas de 3 operandos");
+            return -1;
+        }else{
+            // Tomar las últimas tres líneas si hay más de tres líneas
+            int inicio = Math.max(0, lineas.length - 3);
+            String[] ultimasLineas = Arrays.copyOfRange(lineas, inicio, lineas.length);
 
-        // Tomar las últimas tres líneas si hay más de tres líneas
-        int inicio = Math.max(0, lineas.length - 3);
-        String[] ultimasLineas = Arrays.copyOfRange(lineas, inicio, lineas.length);
+            // Recorrer cada línea de las últimas tres líneas
+            for (String linea : ultimasLineas) {
+                // Dividir la línea en tokens separados por espacios
+                String[] tokens = linea.trim().split("\\s+");
 
-        Stack<Double> operandos = new Stack<>();
-
-        // Recorrer cada línea de las últimas tres líneas
-        for (String linea : ultimasLineas) {
-            // Dividir la línea en tokens separados por espacios
-            String[] tokens = linea.trim().split("\\s+");
-
-            // Recorrer los tokens de la línea
-            for (String token : tokens) {
-                if (esOperador(token)) {
-                    double operando2 = operandos.pop();
-                    double operando1 = operandos.pop();
-                    double resultado = aplicarOperador(token, operando1, operando2);
-                    operandos.push(resultado);
-                } else {
-                    operandos.push(Double.valueOf(token));
+                // Recorrer los tokens de la línea
+                for (String token : tokens) {
+                    if (esOperador(token)) {
+                        double operando2 = operandos.pop();
+                        double operando1 = operandos.pop();
+                        double resultado = aplicarOperador(token, operando1, operando2);
+                        operandos.push(resultado);
+                    } else {
+                        operandos.push(Double.valueOf(token));
+                    }
                 }
             }
+            
         }
 
         return operandos.pop().intValue();

@@ -1,8 +1,10 @@
+Modelo\arbolGrafico.class
 Vista\Ventana$1.class
 Modelo\calculadoraPolaca.class
 Vista\Ventana.class
 Vista\Ventana$2.class
 Modelo\arbolBinario.class
 Modelo\arbolBinario$Nodo.class
+Vista\Ventana$3.class
 Controlador\controlador.class
 main\Main.class
