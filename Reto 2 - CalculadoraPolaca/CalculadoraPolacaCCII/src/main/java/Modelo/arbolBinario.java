@@ -4,7 +4,9 @@
  */
 package Modelo;
 
+import java.util.Stack;
 import javax.swing.JPanel;
+import java.util.Arrays;
 
 /**
  *
@@ -87,6 +89,39 @@ public class arbolBinario<T> {
             }
         }
         return nodo;
+    }
+
+    // Método para establecer la raíz del árbol
+    public void setRaiz(Nodo nuevaRaiz) {
+        raiz = nuevaRaiz;
+    }
+
+    // Método para construir el árbol a partir de una expresión en notación polaca inversa
+    public Nodo construirArbol(String expresion) {
+        String[] tokens = expresion.split("\\r?\\n");
+        Stack<Nodo> stack = new Stack<>();
+
+        for (String token : tokens) {
+            if (esOperador(token)) {
+                Nodo derecho = stack.pop();
+                Nodo izquierdo = stack.pop();
+                Nodo nodo = new Nodo((T)token);
+                nodo.izquierdo = izquierdo;
+                nodo.derecho = derecho;
+                stack.push(nodo);
+            } else {
+                stack.push(new Nodo((T)token));
+            }
+        }
+
+        // Al finalizar, la raíz del árbol estará en la parte superior de la pila
+        Nodo nuevaRaiz = stack.isEmpty() ? null : stack.pop();
+        setRaiz(nuevaRaiz); // Establecer la raíz del árbol
+        return nuevaRaiz; // Devolver la raíz del árbol
+    }
+
+    private boolean esOperador(String token) {
+        return token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/");
     }
 
     // Método para buscar un dato en el árbol

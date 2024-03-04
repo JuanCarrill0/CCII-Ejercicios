@@ -32,8 +32,10 @@ public class controlador implements ActionListener {
     private String[] valoresOperadores = {"+", "-", "*", "/"};
     
     private String textoActual = "";
+    private String textoCompleto = "";
+    
     private arbolBinario miArbol = new arbolBinario();
-
+    
     public controlador(Ventana ventana) {
         this.ventana = ventana;
         
@@ -69,51 +71,39 @@ public class controlador implements ActionListener {
             if(esNumero(botonPresionado)){
                 ventana.tablero.setText(textoActual + valorBoton);
                 textoActual = ventana.tablero.getText(); 
+                
+                textoCompleto = textoCompleto + valorBoton;
             }
             
             if(esOperador(botonPresionado)){
-                ventana.tablero.setText(textoActual + "\n" + valorBoton);
-                textoActual = ventana.tablero.getText();
+                ventana.tablero.setText(textoActual + valorBoton);
+                textoActual = ventana.tablero.getText(); 
                 
                 int resultado = calculadora.evaluarExpresion(textoActual);
                 
                 if (resultado == -1) {
-                    // Dividir el texto actual en líneas
-                    String[] lineas = textoActual.split("\\r?\\n");
-
-                    // Tomar todas las líneas excepto las dos últimas
-                    StringBuilder nuevoTexto = new StringBuilder();
-                    for (int i = 0; i < lineas.length - 2; i++) {
-                        nuevoTexto.append(lineas[i]).append("\n");
-                    }
-
+                    StringBuilder nuevoTexto = eliminarLineas(2 , textoActual);
                     // Actualizar textoActual
                     textoActual = nuevoTexto.toString();
                     
                     // Actualizar el texto en la ventana
                     ventana.tablero.setText(textoActual);  
                 }else{
-                    String[] lineas = textoActual.split("\\r?\\n");
-
-                    // Tomar las últimas tres líneas si hay más de tres líneas
-                    int inicio = Math.max(0, lineas.length - 3);
-                    StringBuilder nuevoTexto = new StringBuilder();
-                    for (int i = 0; i < inicio; i++) {
-                        nuevoTexto.append(lineas[i]).append("\n");
-                    }
-                    nuevoTexto.append(resultado).append("\n");
+                    StringBuilder nuevoTexto = eliminarLineas(3 , textoActual);
+                    nuevoTexto.append(resultado);
 
                     // Actualizar textoActual
                     textoActual = nuevoTexto.toString();
-
+                    
+                    textoCompleto = textoCompleto + valorBoton;
                     // Actualizar el texto en la ventana
                     ventana.tablero.setText(textoActual);    
                 }
+                //Llamado de métodos a la contrucción del arbol
+                this.miArbol.construirArbol(textoCompleto);
+                actualizarVista();
             }
             
-            Random random = new Random();
-            this.miArbol.insertar(valorBoton);
-            actualizarVista();
         }
         
          //Borrar tablero
@@ -124,9 +114,25 @@ public class controlador implements ActionListener {
         
         //Si el botón es enter añade un salto de linea en el cuadro de texto
         if(e.getSource() == ventana.enter){
+            //Hacer salto de linea 
             ventana.tablero.setText(textoActual + "\n");
             textoActual = ventana.tablero.getText();
+            //Llamado de métodos a la contrucción del arbol
+            textoCompleto = textoCompleto + "\n";
         }
+    }
+    
+    private StringBuilder eliminarLineas(int cantidadLineas, String textoActual){
+        String[] lineas = textoActual.split("\\r?\\n");
+        
+        // Tomar las últimas tres líneas si hay más de tres líneas
+        int inicio = Math.max(0, lineas.length - cantidadLineas);
+        StringBuilder nuevoTexto = new StringBuilder();
+        for (int i = 0; i < inicio; i++) {
+            nuevoTexto.append(lineas[i]).append("\n");
+        }
+        
+        return nuevoTexto;
     }
 
     private String obtenerValorBoton(JButton boton) {
