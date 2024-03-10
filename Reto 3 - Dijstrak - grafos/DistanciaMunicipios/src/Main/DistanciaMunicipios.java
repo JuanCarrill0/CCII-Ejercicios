@@ -11,10 +11,9 @@ public class DistanciaMunicipios {
     
     public static void main(String[] args) {
         
-        Gestor gestor = new Gestor(20);
+        Dijkstra algoritmoMenorDistancia = new Dijkstra();
         
-        
-        
+        System.out.println(algoritmoMenorDistancia.calcularRuta(10, 14));
     }
     
 }
