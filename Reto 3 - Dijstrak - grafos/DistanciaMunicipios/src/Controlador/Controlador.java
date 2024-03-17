@@ -31,6 +31,7 @@ public class Controlador implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == ventana.CalcularDistancias){
+            /*OPERACION DE MUESTREO PARA DIJSTRAK*/
             int origen = ventana.ComboBoxOrigen.getSelectedIndex();
             int destino = ventana.ComboBoxDestino.getSelectedIndex();
             String[] partes = gestor.calcularDijkstra(origen, destino).split(",");
