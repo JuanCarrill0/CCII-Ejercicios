@@ -12,11 +12,9 @@ import Modelo.Gestor;
  *
  * @author juanc
  */
-public class Dijkstra {
-    
-    public Gestor gestorMunicipios = new Gestor();
-    
-    public int [][] matrAdyacencias = gestorMunicipios.getMunicipiosAdyacentes();
+public class AlgoritmoDijkstra {
+   
+    private int [][] matrAdyacencias;
     
     public String calcularRuta(int ori, int dest) {
         ArrayList<Integer> distancias = new ArrayList<>();
@@ -104,4 +102,7 @@ public class Dijkstra {
         return adyacentes;
     }
 
+    public void setMatrizDeAdyacencias(int[][] matrizAdyacencias){
+        this.matrAdyacencias = matrizAdyacencias;
+    }
 }

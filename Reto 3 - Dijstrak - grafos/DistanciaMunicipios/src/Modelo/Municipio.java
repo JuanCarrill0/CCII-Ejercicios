@@ -14,10 +14,8 @@ public class Municipio {
     private String nombre;
     
     
-    public Municipio(String nombre, float latitud, float longitud){
+    public Municipio(String nombre){
         this.nombre = nombre;
-        this.latitud = latitud;
-        this.longitud = longitud;
     }
     
     public float getLatitud(){

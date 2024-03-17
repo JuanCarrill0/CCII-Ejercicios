@@ -1,55 +1,66 @@
 package Modelo;
 
+import java.util.ArrayList;
+
+
 public class Gestor {
     
+    private AlgoritmoDijkstra algoritmoDijkstra = new AlgoritmoDijkstra();
+    private AlgoritmoA algoritmoA;
+    private Municipio[] municipiosExistentes;
     
-    private final String municipios[] = {
-    "San andrés",
-    "San Zenón",
-    "Mompox",
-    "Ciénaga de oro",
-    "Guarandá",
-    "Convención",
-    "Campamento",
-    "Cañas Gordas",
-    "Caracolí",
-    "Itsmina",
-    "Nobsa",
-    "Vergara",
-    "San Jacinto",
-    "Inirida",
-    "El totumo",
-    "Carurú",
-    "Calamar",
-    "Saladoblanco",
-    "Yacanquer",
-    "Matapalo",};
+    int[][] municipiosAdyacentes = {
+            // San Andrés, San Zenón, Mompox, Ciénaga de Oro, Guarandá, Convención, Campamento, Cañas Gordas, Caracolí, Itsmina, Nobsa, Vergara, San Jacinto, Inirida, El Totumo, Carurú, Calamar, Saladoblanco, Yacanquer, Matapalo
+            {0, 770, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // San Andrés
+            {-1, 0, 30, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // San Zenón
+            {-1, -1, 0, 50, -1, 120, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Mompox
+            {720, -1, 130, 0, -1, -1, 120, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Ciénaga de Oro
+            {-1, -1, -1, -1, 0, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Guarandá
+            {-1, -1, -1, -1, -1, 0, 40, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Convención
+            {-1, -1, -1, -1, -1, -1, 0, 98, -1, 172, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Campamento
+            {-1, -1, -1, -1, -1, -1, -1, 0, 20, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Cañas Gordas
+            {-1, -1, -1, -1, -1, -1, -1, -1, 0, 140, 160, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Caracolí
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Itsmina
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1}, // Nobsa
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1}, // Vergara
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1}, // San Jacinto
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1}, // Inirida
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1}, // El Totumo
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 80, -1, -1, -1}, // Carurú
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 196, -1, -1}, // Calamar
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 78, -1}, // Saladoblanco
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1}, // Yacanquer
+            {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0}  // Matapalo
+        };
     
-    public int[][] municipiosAdyacentes = {
-        {0, 770, -1, -1, -1, -1, -1, -1, 70, -1, -1, 194, -1, 409, -1, -1, -1, -1, -1, 355},
-        {770, 0, 30, -1, -1, -1, -1, -1, -1, -1, 260, 412, -1, 392, 215, 478, -1, -1, -1, -1},
-        {-1, 30, 0, -1, 50, -1, -1, 104, -1, -1, -1, -1, -1, -1, -1, 230, -1, -1, -1, -1},
-        {-1, -1, -1, 0, -1, -1, 120, -1, -1, -1, -1, -1, -1, 443, -1, -1, -1, -1, -1, 363},
-        {-1, -1, 50, -1, 0, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, 162, -1, -1, -1, -1},
-        {-1, -1, -1, -1, 85, 0, -1, 254, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        {-1, -1, -1, 120, -1, -1, 0, -1, 172, -1, -1, 210, 320, -1, -1, -1, -1, 270, -1},
-        {-1, -1, 104, -1, -1, 254, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, 172, -1, -1, -1},
-        {70, -1, -1, -1, -1, -1, 172, -1, 0, 140, 160, -1, -1, -1, -1, -1, -1, -1, 261, -1},
-        {-1, -1, -1, -1, -1, -1, -1, -1, 140, 0, -1, -1, -1, -1, -1, -1, -1, 249, -1, -1},
-        {-1, 260, -1, -1, -1, -1, -1, -1, 160, -1, 0, 85, 178, -1, 44, -1, -1, -1, -1, -1},
-        {194, 412, -1, -1, -1, -1, 210, -1, -1, -1, 85, 0, -1, -1, 123, -1, -1, -1, -1, -1},
-        {-1, -1, -1, -1, -1, -1, 320, -1, -1, -1, 178, -1, 0, -1, -1, -1, -1, -1, 137, -1},
-        {409, 392, -1, 443, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, 195, -1, -1},
-        {-1, 215, -1, -1, -1, -1, -1, -1, -1, -1, 44, 123, -1, -1, 0, -1, -1, -1, -1, -1},
-        {-1, 478, 230, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1},
-        {-1, -1, -1, -1, -1, -1, -1, 172, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1},
-        {-1, -1, -1, -1, -1, -1, -1, -1, -1, 249, -1, -1, -1, 195, -1, -1, -1, 0, -1, -1},
-        {-1, -1, -1, -1, -1, -1, 270, -1, -1, -1, -1, -1, 137, -1, -1, -1, -1, -1, 0, -1},
-        {355, -1, -1, 363, -1, -1, -1, -1, 261, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0}
-    };
+
+    public Gestor(int cantidadMunicipios) {
+        this.municipiosExistentes = new Municipio[cantidadMunicipios];
+        this.algoritmoA = new AlgoritmoA(cantidadMunicipios);
+    }
     
-    public Gestor() {
-        this.municipiosAdyacentes = new int[20][20];
+    public String calcularDijkstra(int origen, int destino){
+        algoritmoDijkstra.setMatrizDeAdyacencias(municipiosAdyacentes);
+        return algoritmoDijkstra.calcularRuta(origen, destino);
+    }
+    
+    public String[] crearMunicipios() {
+        String nombresMunicipios[] = {"San Andres", "San Zenon", "Mompox", "Cienaga de Oro", "Guarandá", "Convencion",
+                "Campamento", "Canas Gordas", "Caracoli", "Itsmina", "Nobsa", "Vergara", "San Jacinto",
+                "Inirida", "El Totumo", "Caruru", "Calamar", "Saladoblanco", "Yacanquer", "Matapalo"};
+
+        ArrayList<Municipio> listaMunicipios = new ArrayList<>();
+        for (String nombreMunicipio : nombresMunicipios) {
+            Municipio municipio = new Municipio(nombreMunicipio);
+            listaMunicipios.add(municipio);
+        }
+
+        // Mostrar los municipios creados
+        for (Municipio municipio : listaMunicipios) {
+            System.out.println("Municipio: " + municipio.getNombre());
+        }
+        
+        return nombresMunicipios;
     }
     
     public int[][] getMunicipiosAdyacentes(){
