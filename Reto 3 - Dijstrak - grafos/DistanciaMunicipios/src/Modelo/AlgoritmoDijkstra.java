@@ -12,97 +12,106 @@ import Modelo.Gestor;
  *
  * @author juanc
  */
+import java.util.ArrayList;
+
 public class AlgoritmoDijkstra {
    
-    private int [][] matrAdyacencias;
-    
-    public String calcularRuta(int ori, int dest) {
-        ArrayList<Integer> distancias = new ArrayList<>();
-        ArrayList<String> rutas = new ArrayList<>();
-        ArrayList<Integer> candidatos = new ArrayList<>();
-        boolean destino = false;
-        ArrayList<Integer> adyacente = adyacentes(ori);
-        rutas.add(String.valueOf(ori));
-        int nodo = 0;
-        while (!destino) {
-            ArrayList<String> rutaux = new ArrayList<>();
-            for (int i = 0; i < rutas.size(); i++) {
-                int tam = rutas.get(i).split(",").length;
-                String dato = (rutas.get(i).split(","))[tam - 1];
-                adyacente = adyacentes(Integer.parseInt(dato));
-                for (int j = 0; j < adyacente.size(); j++) {
-                    if (!this.visitado(adyacente.get(j), rutas.get(i))) {
-                        rutaux.add(rutas.get(i) + "," + adyacente.get(j));
+    private int [][] matrAdyacencias; // Matriz de adyacencias para representar el grafo
 
-                        if (adyacente.get(j) == dest) {
+    // Método para calcular la ruta más corta entre dos nodos
+    public String calcularRuta(int ori, int dest) {
+        ArrayList<String> rutas = new ArrayList<>(); // Lista para almacenar las rutas
+        ArrayList<Integer> distancias = new ArrayList<>(); // Lista para almacenar las distancias
+        ArrayList<Integer> candidatos = new ArrayList<>(); // Lista para almacenar los nodos candidatos
+        boolean destino = false; // Variable para indicar si se ha llegado al destino
+        int nodo = 0; // Variable para contar el número de nodos visitados
+
+        // Inicialización con el nodo origen
+        rutas.add(String.valueOf(ori));
+
+        // Bucle principal para buscar la ruta más corta
+        while (!destino) {
+            ArrayList<String> rutaux = new ArrayList<>(); // Lista auxiliar para generar nuevas rutas
+            for (String ruta : rutas) {
+                String[] nodos = ruta.split(","); // Obtener los nodos de la ruta actual
+                int nodoActual = Integer.parseInt(nodos[nodos.length - 1]); // Obtener el nodo actual
+
+                // Obtener los nodos adyacentes al nodo actual
+                ArrayList<Integer> adyacente = adyacentes(nodoActual);
+
+                // Generar nuevas rutas
+                for (int adj : adyacente) {
+                    if (!visitado(adj, ruta)) {
+                        rutaux.add(ruta + "," + adj);
+
+                        // Verificar si se ha llegado al destino
+                        if (adj == dest) {
                             destino = true;
                             candidatos.add(nodo);
                         }
                         nodo++;
                     }
-
                 }
-
             }
-            rutas = rutaux;
-            distancias = this.distancia(rutas);
-            nodo = 0;
+            rutas = rutaux; // Actualizar las rutas con las nuevas rutas generadas
+            distancias = distancia(rutas); // Calcular las distancias para cada ruta
+            nodo = 0; // Reiniciar el contador de nodos visitados
         }
-        double dist = Double.POSITIVE_INFINITY;
-        for (int i = 0; i < candidatos.size(); i++) {
 
+        double dist = Double.POSITIVE_INFINITY;
+        int mejorRuta = 0;
+
+        // Encontrar la ruta más corta
+        for (int i = 0; i < candidatos.size(); i++) {
             if (distancias.get(candidatos.get(i)) < dist) {
                 dist = distancias.get(candidatos.get(i));
-                nodo = candidatos.get(i);
+                mejorRuta = candidatos.get(i);
             }
         }
-        return rutas.get(nodo) + "," + (int) dist;
 
+        // Devolver la ruta más corta y su distancia
+        return rutas.get(mejorRuta) + "," + (int) dist;
     }
 
-    public ArrayList distancia(ArrayList<String> rutas) {
+    // Método para calcular las distancias para cada ruta
+    public ArrayList<Integer> distancia(ArrayList<String> rutas) {
         ArrayList<Integer> distancias = new ArrayList<>();
-        int dist = 0;
-        String[] ruta;
-        for (int i = 0; i < rutas.size(); i++) {
-            ruta = rutas.get(i).split(",");
-            for (int j = 0; j < ruta.length - 1; j++) {
-                dist = matrAdyacencias[Integer.parseInt(ruta[j])][Integer.parseInt(ruta[j + 1])] + dist;
+        for (String ruta : rutas) {
+            int dist = 0;
+            String[] nodos = ruta.split(",");
+            for (int j = 0; j < nodos.length - 1; j++) {
+                dist += matrAdyacencias[Integer.parseInt(nodos[j])][Integer.parseInt(nodos[j + 1])];
             }
             distancias.add(dist);
-            dist = 0;
-
         }
         return distancias;
     }
 
+    // Método para verificar si un nodo ha sido visitado en una ruta
     public boolean visitado(int dato, String ruta) {
-        boolean vist = false;
-        String aux[] = ruta.split(",");
-
-        int n = 0;
-        if (aux.length > 1) {
-            for (String aux1 : aux) {
-                if (dato == Integer.parseInt(aux1)) {
-                    vist = true;
-                }
+        String[] nodos = ruta.split(",");
+        for (String nodo : nodos) {
+            if (dato == Integer.parseInt(nodo)) {
+                return true;
             }
         }
-        return vist;
-
+        return false;
     }
 
-    public ArrayList adyacentes(int nodo) {
+    // Método para obtener los nodos adyacentes a un nodo dado
+    public ArrayList<Integer> adyacentes(int nodo) {
         ArrayList<Integer> adyacentes = new ArrayList<>();
         for (int i = 0; i < matrAdyacencias.length; i++) {
-            if (matrAdyacencias[nodo][i] != -1 && i != nodo) {
+            if (matrAdyacencias[nodo][i] != 0 && i != nodo) {
                 adyacentes.add(i);
             }
         }
         return adyacentes;
     }
 
+    // Método para establecer la matriz de adyacencias del grafo
     public void setMatrizDeAdyacencias(int[][] matrizAdyacencias){
         this.matrAdyacencias = matrizAdyacencias;
     }
 }
+
