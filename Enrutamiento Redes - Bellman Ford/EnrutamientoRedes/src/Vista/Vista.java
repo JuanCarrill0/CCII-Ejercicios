@@ -26,17 +26,307 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        imageUsuario = new javax.swing.JLabel();
+        imageUsuario1 = new javax.swing.JLabel();
+        imageUsuario2 = new javax.swing.JLabel();
+        imageUsuario3 = new javax.swing.JLabel();
+        imageUsuario4 = new javax.swing.JLabel();
+        imageUsuario5 = new javax.swing.JLabel();
+        imageServidor = new javax.swing.JLabel();
+        imageServidor1 = new javax.swing.JLabel();
+        imageServidor2 = new javax.swing.JLabel();
+        imageServidor3 = new javax.swing.JLabel();
+        imageServidor4 = new javax.swing.JLabel();
+        imageDistribucion = new javax.swing.JLabel();
+        imageServidor6 = new javax.swing.JLabel();
+        imageDistribucion1 = new javax.swing.JLabel();
+        imageDistribucion2 = new javax.swing.JLabel();
+        imageDistribucion3 = new javax.swing.JLabel();
+        imageDistribucion4 = new javax.swing.JLabel();
+        imageDistribucion5 = new javax.swing.JLabel();
+        imageDistribucion6 = new javax.swing.JLabel();
+        imageDistribucion7 = new javax.swing.JLabel();
+        imageDistribucion8 = new javax.swing.JLabel();
+        imageDistribucion9 = new javax.swing.JLabel();
+        imageNucleo = new javax.swing.JLabel();
+        imageDistribucion11 = new javax.swing.JLabel();
+        imageNucleo1 = new javax.swing.JLabel();
+        imageNucleo2 = new javax.swing.JLabel();
+        imageDistribucion10 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(200, 0), new java.awt.Dimension(200, 0), new java.awt.Dimension(200, 32767));
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        imageUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Usuario.png"))); // NOI18N
+
+        imageUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Usuario.png"))); // NOI18N
+
+        imageUsuario2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Usuario.png"))); // NOI18N
+
+        imageUsuario3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Usuario.png"))); // NOI18N
+
+        imageUsuario4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Usuario.png"))); // NOI18N
+
+        imageUsuario5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Usuario.png"))); // NOI18N
+
+        imageServidor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Servidor.png"))); // NOI18N
+
+        imageServidor1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Servidor.png"))); // NOI18N
+
+        imageServidor2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Servidor.png"))); // NOI18N
+
+        imageServidor3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Servidor.png"))); // NOI18N
+
+        imageServidor4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Servidor.png"))); // NOI18N
+
+        imageDistribucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageServidor6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Servidor.png"))); // NOI18N
+
+        imageDistribucion1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageDistribucion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageDistribucion3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageDistribucion4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageDistribucion5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageDistribucion6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageDistribucion7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageDistribucion8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageDistribucion9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageNucleo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Nucleo.png"))); // NOI18N
+
+        imageDistribucion11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        imageNucleo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Nucleo.png"))); // NOI18N
+
+        imageNucleo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Nucleo.png"))); // NOI18N
+
+        imageDistribucion10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Distribución.png"))); // NOI18N
+
+        jLabel2.setText("Usuario A");
+
+        jLabel3.setText("Usuario B");
+
+        jLabel4.setText("Usuario C");
+
+        jLabel5.setText("Usuario D");
+
+        jLabel6.setText("Usuario E");
+
+        jLabel7.setText("Usuario F");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(imageUsuario2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(imageServidor)
+                                .addGap(233, 233, 233)
+                                .addComponent(imageDistribucion10)
+                                .addGap(105, 105, 105)
+                                .addComponent(imageDistribucion5)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(jLabel2)
+                                                    .addGap(18, 18, 18))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabel4)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addComponent(imageUsuario5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(imageUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                    .addGap(18, 18, 18)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(19, 19, 19)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(imageServidor3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addComponent(imageNucleo2)
+                                                        .addGap(76, 76, 76))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addComponent(imageDistribucion11)
+                                                        .addGap(63, 63, 63)))
+                                                .addComponent(imageDistribucion2))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(43, 43, 43)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(44, 44, 44)
+                                                        .addComponent(imageDistribucion1))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(imageServidor1)
+                                                        .addGap(72, 72, 72)
+                                                        .addComponent(imageDistribucion3)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(imageNucleo))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(imageDistribucion4)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(66, 66, 66)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(imageDistribucion)
+                                            .addComponent(imageNucleo1)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(48, 48, 48)
+                                        .addComponent(imageDistribucion6)))
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(imageDistribucion9)
+                                    .addComponent(imageDistribucion8)
+                                    .addComponent(imageDistribucion7))
+                                .addGap(68, 68, 68)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(imageServidor2)
+                                    .addComponent(imageServidor4)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(imageServidor6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(imageUsuario1)
+                        .addComponent(imageUsuario3)
+                        .addComponent(imageUsuario4))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(74, 74, 74))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel1))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(imageServidor6)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(jLabel2)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(jLabel5)
+                                                            .addGap(2, 2, 2)))
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(imageUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(imageUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(imageServidor)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel6)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(imageUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(imageUsuario4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(imageServidor2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(imageServidor3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(43, 43, 43))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(imageDistribucion5)
+                                .addGap(44, 44, 44)
+                                .addComponent(imageDistribucion7)
+                                .addGap(48, 48, 48)
+                                .addComponent(imageDistribucion8)
+                                .addGap(28, 28, 28)))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(imageServidor4)
+                            .addComponent(imageUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imageDistribucion9)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(imageDistribucion10))
+                            .addComponent(imageDistribucion1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(imageNucleo1)
+                            .addComponent(imageDistribucion4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(imageDistribucion2)
+                                    .addGap(43, 43, 43)
+                                    .addComponent(imageNucleo)
+                                    .addGap(53, 53, 53))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(imageNucleo2)
+                                    .addGap(38, 38, 38)
+                                    .addComponent(imageDistribucion11)
+                                    .addGap(16, 16, 16)
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(imageDistribucion3)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(imageServidor1)
+                                            .addComponent(imageUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(imageDistribucion)
+                                .addGap(64, 64, 64)
+                                .addComponent(imageDistribucion6)))))
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -78,5 +368,41 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    public javax.swing.JLabel imageDistribucion;
+    public javax.swing.JLabel imageDistribucion1;
+    public javax.swing.JLabel imageDistribucion10;
+    public javax.swing.JLabel imageDistribucion11;
+    public javax.swing.JLabel imageDistribucion2;
+    public javax.swing.JLabel imageDistribucion3;
+    public javax.swing.JLabel imageDistribucion4;
+    public javax.swing.JLabel imageDistribucion5;
+    public javax.swing.JLabel imageDistribucion6;
+    public javax.swing.JLabel imageDistribucion7;
+    public javax.swing.JLabel imageDistribucion8;
+    public javax.swing.JLabel imageDistribucion9;
+    public javax.swing.JLabel imageNucleo;
+    public javax.swing.JLabel imageNucleo1;
+    public javax.swing.JLabel imageNucleo2;
+    public javax.swing.JLabel imageServidor;
+    public javax.swing.JLabel imageServidor1;
+    public javax.swing.JLabel imageServidor2;
+    public javax.swing.JLabel imageServidor3;
+    public javax.swing.JLabel imageServidor4;
+    public javax.swing.JLabel imageServidor6;
+    public javax.swing.JLabel imageUsuario;
+    public javax.swing.JLabel imageUsuario1;
+    public javax.swing.JLabel imageUsuario2;
+    public javax.swing.JLabel imageUsuario3;
+    public javax.swing.JLabel imageUsuario4;
+    public javax.swing.JLabel imageUsuario5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }
