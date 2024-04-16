@@ -1,12 +1,13 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class AlgoritmoBellmanFord {
     private int[][] municipiosAdyacentes;
-    private final int numMunicipios = 20;
+    private final int numMunicipios = 21;
 
     public AlgoritmoBellmanFord() {
     }
@@ -15,19 +16,35 @@ public class AlgoritmoBellmanFord {
         this.municipiosAdyacentes = municipiosAdyacentes;
     }
 
+    public void imprimirMatrizDeAdyacencia() {
+        if (municipiosAdyacentes == null) {
+            System.out.println("La matriz de adyacencia no está inicializada.");
+            return;
+        }
+
+        System.out.println("Matriz de Adyacencia:");
+        for (int i = 0; i < numMunicipios; i++) {
+            for (int j = 0; j < numMunicipios; j++) {
+                System.out.print(municipiosAdyacentes[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+
     public String calcularRutaMasCorta(int origen, int destino) {
         int[] distancia = new int[numMunicipios];
         int[] predecesor = new int[numMunicipios];
 
         // Inicializar distancias y predecesores
-        for (int i = 0; i < numMunicipios; i++) {
-            distancia[i] = Integer.MAX_VALUE;
-            predecesor[i] = -1;
-        }
-        distancia[origen] = 0;
+        Arrays.fill(distancia, Integer.MAX_VALUE);
+        Arrays.fill(predecesor, -1); // Inicializar los predecesores como -1
 
+        distancia[origen] = 0;
+        
+        
         // Relajación de las aristas repetidamente
-        for (int i = 0; i < numMunicipios - 1; i++) {
+        for (int i = 0; i < numMunicipios; i++) {
             for (int u = 0; u < numMunicipios; u++) {
                 for (int v = 0; v < numMunicipios; v++) {
                     if (municipiosAdyacentes[u][v] != 0 && distancia[u] != Integer.MAX_VALUE &&
@@ -54,13 +71,19 @@ public class AlgoritmoBellmanFord {
         int nodoActual = destino;
         while (nodoActual != origen) {
             ruta.insert(0, nodoActual + ",");
+            if (predecesor[nodoActual] == -1) {
+                // Manejar el caso donde no hay predecesor para el nodo actual
+                return "No hay ruta disponible";
+            }
             nodoActual = predecesor[nodoActual];
         }
         ruta.insert(0, origen + ",");
         ruta.append(distancia[destino]);
-
+        
+        System.out.println("Ruta mas corta");
         return ruta.toString();
     }
+
 
     private String imprimirRuta(int destino, int[] predecesor) {
         if (destino < 0)

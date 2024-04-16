@@ -17,12 +17,17 @@ public class Conexion {
     private float constanteDeDensidadEspectral;
     private float potenciaDeSenal;
     private float potenciaDeRuido;
-    private double relacionSR;
+    private int relacionSR;
     
-    public Conexion(float anchoDeBanda, float anchoDeBandaEfectivo,float constanteDeDensidadEspectral){
+    public Conexion(float anchoDeBanda, float anchoDeBandaEfectivo, float constanteDeDensidadEspectral){
         this.anchoDeBanda = anchoDeBanda;
         this.anchoDeBandaEfectivo = anchoDeBandaEfectivo;
         this.constanteDeDensidadEspectral = constanteDeDensidadEspectral;
+        
+        // Inicializar potencia de señal y de ruido
+        setPotenciaDeRuido();
+        setPotencialDeSenal();
+        setRelacionSR();
     }
     
     protected void setPotencialDeSenal(){
@@ -34,7 +39,7 @@ public class Conexion {
     }
     
     protected void setRelacionSR(){
-        this.relacionSR = 10 * Math.log(this.potenciaDeSenal / this.potenciaDeRuido);
+        this.relacionSR = (int) (10 * Math.log(this.potenciaDeSenal / this.potenciaDeRuido));
     }
     
     protected double getPotencialDeSenal(){
@@ -45,7 +50,7 @@ public class Conexion {
         return this.potenciaDeRuido;
     }
     
-    protected double getRelacionSR(){
+    protected int getRelacionSR(){
         return this.relacionSR;
     }
     
