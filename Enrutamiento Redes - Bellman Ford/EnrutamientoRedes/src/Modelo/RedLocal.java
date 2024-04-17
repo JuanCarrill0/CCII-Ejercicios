@@ -10,7 +10,11 @@ package Modelo;
  */
 public class RedLocal {
     
-    private final AlgoritmoBellmanFord bellmanFord = new AlgoritmoBellmanFord();
+    private final AlgoritmoBellmanFord bellmanFord;
+    
+    public RedLocal(AlgoritmoBellmanFord bellmanFord){
+        this.bellmanFord = bellmanFord;
+    }
     
     // Creación de servidores
     Servidor servidorA = new Servidor(100, 90, 5, 8080, "192.168.1.1");
@@ -96,29 +100,43 @@ public class RedLocal {
         return (int)(relacionSR1 + relacionSR2);
     }
     public int[][] matrizAdyacenciaRedLocal = {
-    //SA-SB-SC-SD-SE-SF-RN1-RN2-RN3-RD1-RD2-RD3-RD4-RD5-RD6-RD7-RD8-RD9-RD10-RD11-RD12
-    /*SA 0*/     {0, 0, 0, 0, 0, 0, SA_RN1, 0, 0, SA_RD1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0},
-    /*SB 1*/     {0, 0, 0, 0, 0, 0, SB_RN1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0},
-    /*SC 2*/     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, SC_RD2, SC_RD3, 0, 0, 0, 0, 0, 0, 0, 0,0},
-    /*SD 3*/     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD9_SD, RD10_SD, 0,0},
-    /*SE 4*/     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD10_SE, 0,0},
-    /*SF 5*/     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,RD12_SF},
-    /*RN1 6*/    {SA_RN1, SB_RN1, 0, 0, 0, 0, 0, 0, 0, RD1_RN1, RD2_RN1, 0, 0, RN1_RD5, 0, 0, 0, 0, 0, 0,0},
-    /*RN2 7*/    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD2_RN2, RD3_RN2, 0, RD5_RN2, 0, RN2_RD7, RN2_RD8, 0, 0, 0,0},
-    /*RN3 8*/    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD4_RN3, RD5_RN3, RD6_RN3, RD7_RN3, 0, RN3_RD9, RN3_RD10, RN3_RD11,0},
-    /*RD1 9*/    {SA_RD1, 0, 0, 0, 0, 0, RD1_RN1, 0, 0, 0, 0, 0, RD1_RD4, 0, RD1_RD6, 0, 0, 0, 0, 0,0},
-    /*RD2 10*/   {0, SC_RD2, 0, 0, 0, 0, RD2_RN1, RD2_RN2, 0, 0, 0, RD2_RD3, 0, 0, 0, 0, 0, 0, 0, 0,0},
-    /*RD3 11*/   {0, 0, SC_RD3, 0, 0, 0, 0, RD3_RN2, 0, 0, RD2_RD3, 0, 0, 0, 0, 0, 0, 0, 0, 0,0},
-    /*RD4 12*/   {0, 0, 0, 0, 0, 0, 0, 0, RD4_RN3, RD1_RD4, 0, 0, 0, RD4_RD5, 0, 0, 0, 0, 0, 0,0},
-    /*RD5 13*/   {0, 0, 0, 0, 0, 0, RN1_RD5, RD5_RN2, RD5_RN3, 0, 0, 0, RD4_RD5, 0, 0, 0, 0, 0, 0, 0,0},
-    /*RD6 14*/   {0, 0, 0, 0, 0, 0, 0, 0, RD6_RN3, RD1_RD6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0},
-    /*RD7 15*/   {0, 0, 0, 0, 0, 0, 0, RN2_RD7, RD7_RN3, 0, 0, 0, 0, 0, 0, 0, RD7_RD8, 0, 0, RD7_RD11,0},
-    /*RD8 16*/   {0, 0, 0, 0, 0, 0, 0, RN2_RD8, 0, 0, 0, 0, 0, 0, 0, RD7_RD8, 0, 0, 0, RD8_RD11,0},
-    /*RD9 17*/   {0, 0, 0, RD9_SD, 0, 0, 0, 0, RN3_RD9, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD9_RD10, 0,0},
-    /*RD10 18*/  {0, 0, 0, RD10_SD, RD10_SE, 0, 0, 0, RN3_RD10, 0, 0, 0, 0, 0, 0, 0, 0, RD9_RD10, 0, RD10_RD11,0},
-    /*RD11 19*/  {0, 0, 0, 0, 0, 0, RN3_RD11, 0, 0, 0, 0, 0, 0, 0, 0, RD7_RD11, RD8_RD11, 0, RD10_RD11, 0,RD11_RD12},
-    /*RD12 20*/  {0, 0, 0, 0, 0, RD12_SF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD11_RD12,0},
-};
+        //SA-SB-SC-SD-SE-SF-RN1-RN2-RN3-RD1-RD2-RD3-RD4-RD5-RD6-RD7-RD8-RD9-RD10-RD11-RD12
+        /*SA 0*/     {0, 0, 0, 0, 0, 0, SA_RN1, 0, 0, SA_RD1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0},
+        /*SB 1*/     {0, 0, 0, 0, 0, 0, SB_RN1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0},
+        /*SC 2*/     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, SC_RD2, SC_RD3, 0, 0, 0, 0, 0, 0, 0, 0,0},
+        /*SD 3*/     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD9_SD, RD10_SD, 0,0},
+        /*SE 4*/     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD10_SE, 0,0},
+        /*SF 5*/     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,RD12_SF},
+        /*RN1 6*/    {SA_RN1, SB_RN1, 0, 0, 0, 0, 0, 0, 0, RD1_RN1, RD2_RN1, 0, 0, RN1_RD5, 0, 0, 0, 0, 0, 0,0},
+        /*RN2 7*/    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD2_RN2, RD3_RN2, 0, RD5_RN2, 0, RN2_RD7, RN2_RD8, 0, 0, 0,0},
+        /*RN3 8*/    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD4_RN3, RD5_RN3, RD6_RN3, RD7_RN3, 0, RN3_RD9, RN3_RD10, RN3_RD11,0},
+        /*RD1 9*/    {SA_RD1, 0, 0, 0, 0, 0, RD1_RN1, 0, 0, 0, 0, 0, RD1_RD4, 0, RD1_RD6, 0, 0, 0, 0, 0,0},
+        /*RD2 10*/   {0, SC_RD2, 0, 0, 0, 0, RD2_RN1, RD2_RN2, 0, 0, 0, RD2_RD3, 0, 0, 0, 0, 0, 0, 0, 0,0},
+        /*RD3 11*/   {0, 0, SC_RD3, 0, 0, 0, 0, RD3_RN2, 0, 0, RD2_RD3, 0, 0, 0, 0, 0, 0, 0, 0, 0,0},
+        /*RD4 12*/   {0, 0, 0, 0, 0, 0, 0, 0, RD4_RN3, RD1_RD4, 0, 0, 0, RD4_RD5, 0, 0, 0, 0, 0, 0,0},
+        /*RD5 13*/   {0, 0, 0, 0, 0, 0, RN1_RD5, RD5_RN2, RD5_RN3, 0, 0, 0, RD4_RD5, 0, 0, 0, 0, 0, 0, 0,0},
+        /*RD6 14*/   {0, 0, 0, 0, 0, 0, 0, 0, RD6_RN3, RD1_RD6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0},
+        /*RD7 15*/   {0, 0, 0, 0, 0, 0, 0, RN2_RD7, RD7_RN3, 0, 0, 0, 0, 0, 0, 0, RD7_RD8, 0, 0, RD7_RD11,0},
+        /*RD8 16*/   {0, 0, 0, 0, 0, 0, 0, RN2_RD8, 0, 0, 0, 0, 0, 0, 0, RD7_RD8, 0, 0, 0, RD8_RD11,0},
+        /*RD9 17*/   {0, 0, 0, RD9_SD, 0, 0, 0, 0, RN3_RD9, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD9_RD10, 0,0},
+        /*RD10 18*/  {0, 0, 0, RD10_SD, RD10_SE, 0, 0, 0, RN3_RD10, 0, 0, 0, 0, 0, 0, 0, 0, RD9_RD10, 0, RD10_RD11,0},
+        /*RD11 19*/  {0, 0, 0, 0, 0, 0, RN3_RD11, 0, 0, 0, 0, 0, 0, 0, 0, RD7_RD11, RD8_RD11, 0, RD10_RD11, 0,RD11_RD12},
+        /*RD12 20*/  {0, 0, 0, 0, 0, RD12_SF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RD11_RD12,0},
+    };
+    
+    public String obtenerSigla(int posicion) {
+        String[] siglas = {"SA", "SB", "SC", "SD", "SE", "SF", "RN1", "RN2", "RN3", "RD1", "RD2", "RD3", "RD4", "RD5", "RD6", "RD7", "RD8", "RD9", "RD10", "RD11", "RD12"};
+        if (posicion >= 0 && posicion < siglas.length) {
+            return siglas[posicion];
+        } else {
+            return "Posición no válida";
+        }
+    }
+
+    
+    public int[][] getMatrizAdyacencia(){
+        return this.matrizAdyacenciaRedLocal;
+    }
 
 
     

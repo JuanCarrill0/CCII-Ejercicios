@@ -1,0 +1,26 @@
+-d
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\build\\classes"
+-classpath
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\build\\classes"
+-sourcepath
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\build\\empty"
+-target
+21
+-encoding
+UTF-8
+-g
+-processorpath
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\build\\empty"
+-s
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\build\\generated-sources\\ap-source-output"
+-source
+21
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Controlador\\Controlador.java"
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Main\\main.java"
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Modelo\\AlgoritmoBellmanFord.java"
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Modelo\\Conexion.java"
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Modelo\\RedLocal.java"
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Modelo\\RouterDistribucion.java"
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Modelo\\RouterNucleo.java"
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Modelo\\Servidor.java"
+"C:\\Users\\tic-asisweb01\\Desktop\\Git\\CCII-Ejercicios\\Enrutamiento Redes - Bellman Ford\\EnrutamientoRedes\\src\\Vista\\Vista.java"

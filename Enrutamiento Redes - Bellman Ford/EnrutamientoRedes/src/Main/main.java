@@ -4,7 +4,9 @@
  */
 package Main;
 
-import Modelo.RedLocal;
+import Controlador.*;
+import Modelo.*;
+import Vista.Vista;
 
 /**
  *
@@ -16,9 +18,11 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        RedLocal miRed = new RedLocal();
+        Vista ventana = new Vista();
+        Controlador miControlador = new Controlador(ventana);
         
-        miRed.calcularDistancias(1, 3);
+        
+        miControlador.iniciar();
     }
     
 }
