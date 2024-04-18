@@ -6,6 +6,8 @@ package Controlador;
 
 import Vista.Vista;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -71,6 +73,36 @@ public class GestorInterfaz {
                 System.err.println("El JLabel para la sigla " + siglaRecorrido + " es nulo.");
             }
         });
+    }
+    
+    public void pintarRutaMasCorta(String rutaMasCorta) {
+        if (rutaMasCorta == null || rutaMasCorta.isEmpty()) {
+            // Manejar el caso donde no hay una ruta disponible
+            System.out.println("No hay ruta");
+            return;
+        }
+        
+        List<String> rutaMasCortaArray = separarRuta(rutaMasCorta);
+        for (int i = 0; i < rutaMasCortaArray.size() - 1; i++) {
+            JLabel posicionLabel = obtenerLabelPorSigla(rutaMasCortaArray.get(i));
+            posicionLabel.setOpaque(true); // Asegúrate de que el JLabel sea opaco
+            posicionLabel.setBackground(Color.green);
+            posicionLabel.repaint(); // Repintar el JLabel para que los cambios sean visibles
+        }
+    }
+    
+    public void escribirInforme(String dato , int distancia){
+        String textoActual = ventana.informeArea.getText();
+        ventana.informeArea.setText(textoActual + dato + " Con distancia = "+distancia+"\n");
+    }
+        
+    private List<String> separarRuta(String ruta) {
+        List<String> rutaSeparada = new ArrayList<>();
+        String[] partes = ruta.split(",");
+        for (String parte : partes) {
+            rutaSeparada.add(parte);
+        }
+        return rutaSeparada;
     }
     
 }

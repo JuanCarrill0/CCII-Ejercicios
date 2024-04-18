@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -61,7 +64,8 @@ public class AlgoritmoBellmanFord {
                                     distancia[u] + municipiosAdyacentes[u][v] < distancia[v]) {
                                 distancia[v] = distancia[u] + municipiosAdyacentes[u][v];
                                 predecesor[v] = u;
-                                registroPredecesores.put(u + " -> " + v, distancia[v]); // Guardar par de nodos y distancia en el registro
+                                registroPredecesores.put(interfaz.obtenerSigla(u) + " -> " + interfaz.obtenerSigla(v), distancia[v]); // Guardar par de nodos y distancia en el registro
+                                interfaz.escribirInforme(interfaz.obtenerSigla(u) + " -> " + interfaz.obtenerSigla(v), distancia[v]);
                                 // Actualizar la interfaz después de cada predecesor encontrado
                                 publish(u);
                                 Thread.sleep(1000); // Ajusta el tiempo de espera según sea necesario
@@ -74,14 +78,14 @@ public class AlgoritmoBellmanFord {
                 StringBuilder ruta = new StringBuilder();
                 int nodoActual = destino;
                 while (nodoActual != origen) {
-                    ruta.insert(0, nodoActual + ",");
+                    ruta.insert(0, interfaz.obtenerSigla(nodoActual) + ",");
                     if (predecesor[nodoActual] == -1) {
                         // Manejar el caso donde no hay predecesor para el nodo actual
                         return "No hay ruta disponible";
                     }
                     nodoActual = predecesor[nodoActual];
                 }
-                ruta.insert(0, origen + ",");
+                ruta.insert(0, interfaz.obtenerSigla(origen)+ ",");
                 ruta.append(distancia[destino]);
 
                 System.out.println("Ruta mas corta");
@@ -91,6 +95,7 @@ public class AlgoritmoBellmanFord {
                 }
                 
                 System.out.println(ruta.toString());
+                interfaz.escribirInforme("Recorrido de la ruta mas corta = "+ruta.toString(), distancia[destino]);
                 return ruta.toString();
             }
 
@@ -104,7 +109,15 @@ public class AlgoritmoBellmanFord {
 
             @Override
             protected void done() {
-                // Manejar cualquier acción después de que se complete el cálculo del algoritmo
+                try {
+                    String ruta = get();
+                    interfaz.pintarRutaMasCorta(ruta);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(AlgoritmoBellmanFord.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExecutionException ex) {
+                    Logger.getLogger(AlgoritmoBellmanFord.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         };
 

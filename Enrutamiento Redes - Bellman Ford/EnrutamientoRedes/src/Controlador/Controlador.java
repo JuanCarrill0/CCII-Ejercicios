@@ -17,7 +17,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
         
 public class Controlador implements ActionListener {
     private final Vista ventana;
@@ -48,39 +52,45 @@ public class Controlador implements ActionListener {
             int origen = ventana.comboBoxOrigen.getSelectedIndex();
             int destino = ventana.comboBoxDestino.getSelectedIndex();
 
-            obtenerRutaMasCorta(origen, destino);
+            SwingWorker<String, Integer> worker = new SwingWorker<>() {
+                @Override
+                protected String doInBackground() throws Exception {
+                    return obtenerRutaMasCorta(origen, destino);
+                }
 
-            /*for (int i = 0; i < rutaMasCorta.size() - 1; i++) {
-                String sigla = miRed.obtenerSigla(rutaMasCorta.get(i));
-                JLabel posicionLabel = interfaz.obtenerLabelPorSigla(sigla);
-                posicionLabel.setOpaque(true); // Asegúrate de que el JLabel sea opaco
-                posicionLabel.setBackground(Color.green);
-                posicionLabel.repaint(); // Repintar el JLabel para que los cambios sean visibles
-            }
-            */
+                @Override
+                protected void done() {
+                    try {
+                        String rutaMasCorta = get(); // Obtener el resultado del cálculo
+                        System.out.println("La ruta mas corta ES = "+rutaMasCorta);
+                    } catch (InterruptedException | ExecutionException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+
+            worker.execute(); // Iniciar el trabajo en segundo plano
         }
     }
     
-    public List<Integer> obtenerRutaMasCorta(int origen, int destino){
+    public String obtenerRutaMasCorta(int origen, int destino) throws ExecutionException {
         bellmanFord.setMatrizDeAdyacencias(miRed.getMatrizAdyacencia());
-        
-        String rutaMasCorta = bellmanFord.calcularRutaMasCorta(origen, destino);
-        /*List<Integer> rutaSeparada = separarRuta(rutaMasCorta);
-       
-        //System.out.print(miRed.obtenerSigla(rutaSeparada.get(i)) + ",");    
-        System.out.println("Distancia: " + rutaSeparada.get(rutaSeparada.size() - 1));
-        System.out.println(rutaSeparada);
-        return rutaSeparada;
-        */
-        return null;
-    }
-    
-    private List<Integer> separarRuta(String ruta) {
-        List<Integer> rutaSeparada = new ArrayList<>();
-        String[] partes = ruta.split(",");
-        for (String parte : partes) {
-            rutaSeparada.add(Integer.valueOf(parte));
+        SwingWorker<String, Integer> worker = new SwingWorker<>() {
+            @Override
+            protected String doInBackground() throws Exception {
+                return bellmanFord.calcularRutaMasCorta(origen, destino);
+            }
+        };
+
+        worker.execute(); // Iniciar el trabajo en segundo plano
+        try {
+            // Esperar hasta que el trabajo en segundo plano haya terminado y devolver el resultado
+            return worker.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return null;
         }
-        return rutaSeparada;
     }
+
+
 }
