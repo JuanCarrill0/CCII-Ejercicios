@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ALEJANDRO/Documents/NetBeansProjects/EdificioE/src/Main/Main.java</file>
-            <file>file:/C:/Users/ALEJANDRO/Documents/NetBeansProjects/EdificioE/src/Modelo/Piso.java</file>
-            <file>file:/C:/Users/ALEJANDRO/Documents/NetBeansProjects/EdificioE/src/Modelo/FachadaCreacionEdificio.java</file>
+            <file>file:/C:/Users/tic-asisweb01/Desktop/Git/CCII-Ejercicios/EdificioE/src/Vista/MenuCreacion.java</file>
+            <file>file:/C:/Users/tic-asisweb01/Desktop/Git/CCII-Ejercicios/EdificioE/src/Modelo/Piso.java</file>
+            <file>file:/C:/Users/tic-asisweb01/Desktop/Git/CCII-Ejercicios/EdificioE/src/Modelo/FachadaCreacionEdificio.java</file>
+            <file>file:/C:/Users/tic-asisweb01/Desktop/Git/CCII-Ejercicios/EdificioE/src/Controlador/Controlador.java</file>
+            <file>file:/C:/Users/tic-asisweb01/Desktop/Git/CCII-Ejercicios/EdificioE/src/Vista/Simulacion.java</file>
+            <file>file:/C:/Users/tic-asisweb01/Desktop/Git/CCII-Ejercicios/EdificioE/src/Main/Main.java</file>
+            <file>file:/C:/Users/tic-asisweb01/Desktop/Git/CCII-Ejercicios/EdificioE/src/Vista/MostrarHabitacionesPanel.java</file>
         </group>
     </open-files>
 </project-private>

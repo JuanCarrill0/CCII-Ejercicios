@@ -27,7 +27,7 @@ public class FachadaCreacionEdificio {
         
         for(int i=0; i<cantidadPisos; i++){
             Piso piso = new Piso("Piso "+String.valueOf(i+1));
-            crearEspacios(piso,10);
+            crearEspacios(piso,7);
             edificio.agregarPiso(piso);
         }
         

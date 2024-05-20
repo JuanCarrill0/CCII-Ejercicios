@@ -14,4 +14,20 @@ public abstract class Fuente{
         this.tipo = tipo;
     }
   
+    public String getIdentificador(){
+        return identificador;
+    }
+    
+    public int getFrecuencia(){
+        return frecuencia;
+    }
+    
+    public int getDuracion(){
+        return duracion;
+    }
+    
+    public String getTipo(){
+        return tipo;
+    }
+
 }

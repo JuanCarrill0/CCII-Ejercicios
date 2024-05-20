@@ -15,4 +15,13 @@ public class MaterialEnvolvente {
     public String getNombre(){
         return tipo;
     }
+    
+    public float getAbsorcionAcustica(){
+        return absorcionAcustica;
+    }
+    
+    public float getGrosor(){
+        return grosor;
+    }
+
 }

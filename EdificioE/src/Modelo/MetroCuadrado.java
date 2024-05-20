@@ -13,6 +13,10 @@ public class MetroCuadrado{
         fuentes = new ArrayList<>();
     }
     
+    public void agregarFuente(Fuente fuente){
+        fuentes.add(fuente);
+    }
+    
     public void calcularRuido(ArrayList<Fuente> fuentesAdyacentes){
         
     }
@@ -24,4 +28,5 @@ public class MetroCuadrado{
     public ArrayList<Fuente> getFuentes(){
         return fuentes;
     }
+
 }

@@ -87,8 +87,13 @@ public class Espacio{
         return espacioHabitacion;
     }
     
+    public String getIdentificador(){
+        return identificador;
+    }
+    
     public Envoltura getEnvolturaDelEspacio() {
         return envolturaDelEspacio;
     }
+
     
 }
