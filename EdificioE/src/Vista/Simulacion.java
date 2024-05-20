@@ -58,7 +58,7 @@ public class Simulacion extends javax.swing.JFrame {
         targetPiso = new javax.swing.JTextField();
         simularHabitacion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        targetPiso1 = new javax.swing.JTextField();
+        targetHabitacion = new javax.swing.JTextField();
         simularPiso = new javax.swing.JButton();
         SimulacionPanel = new javax.swing.JPanel();
 
@@ -97,7 +97,7 @@ public class Simulacion extends javax.swing.JFrame {
 
         jLabel3.setText("¿Que Habitación desea ver?");
 
-        targetPiso1.setText("2");
+        targetHabitacion.setText("2");
 
         simularPiso.setText("Simular Piso");
 
@@ -130,7 +130,7 @@ public class Simulacion extends javax.swing.JFrame {
                     .addGroup(panelPisoLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(targetPiso1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(targetHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SimulacionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -155,7 +155,7 @@ public class Simulacion extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addGroup(panelPisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(targetPiso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(targetHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(simularHabitacion)
                         .addGap(0, 203, Short.MAX_VALUE))
@@ -247,8 +247,8 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JPanel panelTitulo;
     public javax.swing.JButton simularHabitacion;
     public javax.swing.JButton simularPiso;
+    public javax.swing.JTextField targetHabitacion;
     public javax.swing.JTextField targetPiso;
-    public javax.swing.JTextField targetPiso1;
     private javax.swing.JLabel tituloVentana;
     private javax.swing.JPanel ventanaPrincipal;
     // End of variables declaration//GEN-END:variables

@@ -6,10 +6,10 @@ import java.awt.*;
 import java.util.List;
 import javax.swing.JPanel;
 
-public class MostrarHabitacionesPanel extends JPanel {
+public class MostrarPisosPanel extends JPanel {
     private List<Espacio> disposicion;
 
-    public MostrarHabitacionesPanel(List<Espacio> disposicion) {
+    public MostrarPisosPanel(List<Espacio> disposicion) {
         this.disposicion = disposicion;
     }
 

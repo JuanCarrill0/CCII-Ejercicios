@@ -1,6 +1,6 @@
 package Controlador;
 
-import Vista.MostrarHabitacionesPanel;
+import Vista.MostrarPisosPanel;
 import Modelo.*;
 import Vista.*;
 import java.awt.*;
@@ -19,6 +19,7 @@ public class Controlador implements ActionListener{
         this.menuCreacion.Simular.addActionListener(e -> actionPerformed(e));
         
         this.simulacion.simularPiso.addActionListener(e -> actionPerformed(e));
+        this.simulacion.simularHabitacion.addActionListener(e -> actionPerformed(e));
     }
     
     public void iniciar() {
@@ -60,12 +61,16 @@ public class Controlador implements ActionListener{
         
         if(e.getSource() == simulacion.simularPiso){
             Edificio miEdificio = this.fachada.getEdificio();
-            System.out.println(miEdificio.getIdentificador());
-            System.out.println(miEdificio.getPisos().size());
-            Piso primerPiso = miEdificio.getPisos().get(0); // Suponiendo que quieres mostrar el primer piso
-            System.out.println(primerPiso.getDisposicion().get(2).getIdentificador());
-            MostrarHabitacionesPanel panel = new MostrarHabitacionesPanel(primerPiso.getDisposicion());
-            simulacion.setDisplayPanel(panel);
+            Piso Piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText()));
+            MostrarPisosPanel panelPisos = new MostrarPisosPanel(Piso.getDisposicion());
+            simulacion.setDisplayPanel(panelPisos);
+        }
+        
+        if(e.getSource() == simulacion.simularHabitacion){
+            Edificio miEdificio = this.fachada.getEdificio();
+            Espacio habitacion = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText())).getDisposicion().get(Integer.parseInt(simulacion.targetHabitacion.getText()));
+            MostrarHabitacionPanel panelHabitacion = new MostrarHabitacionPanel(habitacion);
+            simulacion.setDisplayPanel(panelHabitacion);
         }
     }
     
