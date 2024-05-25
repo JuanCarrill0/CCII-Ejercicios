@@ -1,6 +1,6 @@
 package Vista;
 
-import Modelo.Espacio;
+import Modelo.ElementosGrafo.Espacio;
 
 import java.awt.*;
 import java.util.List;

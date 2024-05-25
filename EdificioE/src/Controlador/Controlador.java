@@ -1,18 +1,29 @@
 package Controlador;
 
-import Vista.MostrarPisosPanel;
-import Modelo.*;
+import Modelo.ElementosGrafo.Espacio;
+import Modelo.ElementosEdificio.Edificio;
+import Modelo.ElementosEdificio.Piso;
+import Modelo.ElementosEdificio.FachadaCreacionEdificio;
+import Modelo.ElementosGrafo.GrafoPanel;
+import Modelo.ElementosGrafo.Arista;
+
 import Vista.*;
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 public class Controlador implements ActionListener{
     
-    private MenuCreacion menuCreacion;
-    private Simulacion simulacion = new Simulacion();
-    private FachadaCreacionEdificio fachada = FachadaCreacionEdificio.getFachada();
+    private final MenuCreacion menuCreacion;
+    private final Simulacion simulacion = new Simulacion();
+    private final FachadaCreacionEdificio fachada = FachadaCreacionEdificio.getFachada();
     
+    //Constructor controlador
     public Controlador(MenuCreacion ventana){
         this.menuCreacion = ventana;
         
@@ -22,6 +33,7 @@ public class Controlador implements ActionListener{
         this.simulacion.simularHabitacion.addActionListener(e -> actionPerformed(e));
     }
     
+    //Método para iniciar la ventana del menú
     public void iniciar() {
         menuCreacion.setVisible(true);
         menuCreacion.setEnabled(true);
@@ -30,6 +42,7 @@ public class Controlador implements ActionListener{
         menuCreacion.setResizable(false);
     }
     
+    //Métódo para iniciar la ventana de simulación
     public void iniciarVentanaSimulacion() {
         simulacion.setVisible(true);
         simulacion.setEnabled(true);
@@ -38,112 +51,39 @@ public class Controlador implements ActionListener{
         simulacion.setResizable(false);
     }
     
+    //Método para inicializar el edificio
     public void crearEdificio(int cantidadPisos){
         this.fachada.crearEdificio("Continental", cantidadPisos);
     }
     
-    public void mostrarEdificioConsola(){
-        Edificio miEdificio = this.fachada.getEdificio();
-        mostrarEdificio(miEdificio);  
+    public GrafoPanel crearGrafoPisos(Piso piso) {
+        // Crear y retornar el panel del grafo
+        return new GrafoPanel(piso.getNodos(), piso.getAristas());
     }
+
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == menuCreacion.Simular){
             //Inicialización de los valores en memoria
             this.crearEdificio(Integer.parseInt(menuCreacion.cantidadPisos.getText()));
-            //Muestro en consola
-            mostrarEdificioConsola();
             //Cerrar ventana de creación
             menuCreacion.setVisible(false);
             this.iniciarVentanaSimulacion();
         }
         
-        if(e.getSource() == simulacion.simularPiso){
+        if (e.getSource() == simulacion.simularPiso) {
             Edificio miEdificio = this.fachada.getEdificio();
-            Piso Piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText()));
-            MostrarPisosPanel panelPisos = new MostrarPisosPanel(Piso.getDisposicion());
-            simulacion.setDisplayPanel(panelPisos);
+            Piso piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText()));
+            GrafoPanel grafoPisos;
+            grafoPisos = crearGrafoPisos(piso);
+            simulacion.setDisplayPanel(grafoPisos);
         }
-        
+
         if(e.getSource() == simulacion.simularHabitacion){
             Edificio miEdificio = this.fachada.getEdificio();
-            Espacio habitacion = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText())).getDisposicion().get(Integer.parseInt(simulacion.targetHabitacion.getText()));
+            Espacio habitacion = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText())).getNodos().get(Integer.parseInt(simulacion.targetHabitacion.getText()));
             MostrarHabitacionPanel panelHabitacion = new MostrarHabitacionPanel(habitacion);
-            simulacion.setDisplayPanel(panelHabitacion);
         }
-    }
-    
-    public static void mostrarEdificio(Edificio miEdificio){
-        mostrarPisos(miEdificio);
-    }
-   
-    public static void mostrarPisos(Edificio miEdificio){
-        System.out.println("\n---------------------------------- PISOS DEL EDIFICIO ----------------------------------");
-        System.out.println("\nEdificio: " + miEdificio.getIdentificador());
-        System.out.println("\n           _           ");
-        System.out.println("          | |          ");
-        System.out.println("          | |          ");
-        System.out.println("       _________       ");
-        System.out.println("      |         |      ");
-        System.out.println("    _______________    ");
-        System.out.println("   |  " + miEdificio.getIdentificador() + "  |   ");
-        System.out.println("_______________________");
-        
-        for(int i = miEdificio.getPisos().size()-1; i>=0; i--){
-            System.out.println("| \t" + miEdificio.getPisos().get(i).getIdentificador()+"\t      |");
-            System.out.println("_______________________");
-        }
-        
-        System.out.println("\n---------------------------------- HABITACIONES ----------------------------------");
-        
-        for(int i = 0; i<miEdificio.getPisos().size(); i++){
-            System.out.println("\n---------------- " + miEdificio.getPisos().get(i).getIdentificador()+" ----------------\n");
-            System.out.println("_________________________________________________________________________________________________________________________________________________________________________");
-            mostrarHabitaciones(miEdificio.getPisos().get(i));
-        }
-        
-        System.out.println("\n---------------------------------- HABITACION CON FUENTE ----------------------------------\n");
-        System.out.println(miEdificio.getPisos().get(0).getIdentificador()+" | "+miEdificio.getPisos().get(0).getDisposicion().get(11).getIdentificador()+"\n");
-        mostrarEnvoltura(miEdificio.getPisos().get(0).getDisposicion().get(0));
-        mostrarHabitacionConFuente(miEdificio.getPisos().get(0).getDisposicion().get(0));
-        
-    }
-    
-    public static void mostrarHabitaciones(Piso piso){
-        
-        for(int i = 0; i < piso.getDisposicion().size(); i++){
-            System.out.print("\t"+ piso.getDisposicion().get(i).getIdentificador() +"\t|");
-            if ((i + 1) % 7 == 0) {
-                System.out.print("\n_________________________________________________________________________________________________________________________________________________________________________\n");
-            }
-        }  
-    }
-    
-    public static void mostrarHabitacionConFuente(Espacio habitacion){
-        
-        Fuente fuente = new FuenteInterna("Radio",10000,60,"Electromagnetica");
-        habitacion.getEspacioHabitacion().get(3).agregarFuente(fuente);
-        
-        for(int i = 0; i < habitacion.getEspacioHabitacion().size(); i++){
-            System.out.print("\t"+ habitacion.getEspacioHabitacion().get(i).getFuentes() +"\t|");
-            if ((i + 1) % 5 == 0) {
-                System.out.print("\n_________________________________________________________________________________\n");
-            }
-        }  
-        
-        System.out.println("\n\nFuente: "+habitacion.getEspacioHabitacion().get(3).getFuentes().get(0).getIdentificador()+" | Frecuencia: "+habitacion.getEspacioHabitacion().get(3).getFuentes().get(0).getFrecuencia() + " Hz");
-        System.out.println("\nDuracion: "+habitacion.getEspacioHabitacion().get(3).getFuentes().get(0).getDuracion()+" segundos | Tipo: "+habitacion.getEspacioHabitacion().get(3).getFuentes().get(0).getTipo());
-    }   
-    
-    public static void mostrarEnvoltura(Espacio habitacion){
-        System.out.println("Pared Derecha: "+habitacion.getEnvolturaDelEspacio().getParedDerecha().getNombre()+"\t | Grosor: "+habitacion.getEnvolturaDelEspacio().getParedDerecha().getGrosor()+"cm \t | Absorcion acustica: " +habitacion.getEnvolturaDelEspacio().getParedDerecha().getAbsorcionAcustica()+"dB");
-        System.out.println("Pared Izquierda: "+habitacion.getEnvolturaDelEspacio().getParedIzquierda().getNombre()+"\t | Grosor: "+habitacion.getEnvolturaDelEspacio().getParedIzquierda().getGrosor()+"cm \t | Absorcion acustica: " +habitacion.getEnvolturaDelEspacio().getParedIzquierda().getAbsorcionAcustica()+"dB");
-        System.out.println("Pared Frontal: "+habitacion.getEnvolturaDelEspacio().getParedFrontal().getNombre()+"\t | Grosor: "+habitacion.getEnvolturaDelEspacio().getParedFrontal().getGrosor()+"cm \t | Absorcion acustica: " +habitacion.getEnvolturaDelEspacio().getParedFrontal().getAbsorcionAcustica()+"dB");
-        System.out.println("Pared Trasera: "+habitacion.getEnvolturaDelEspacio().getParedTrasera().getNombre()+"\t | Grosor: "+habitacion.getEnvolturaDelEspacio().getParedTrasera().getGrosor()+"cm \t | Absorcion acustica: " +habitacion.getEnvolturaDelEspacio().getParedTrasera().getAbsorcionAcustica()+"dB");
-        System.out.println("Techo: "+habitacion.getEnvolturaDelEspacio().getTecho().getNombre()+"\t | Grosor: "+habitacion.getEnvolturaDelEspacio().getTecho().getGrosor()+"cm \t | Absorcion acustica: " +habitacion.getEnvolturaDelEspacio().getTecho().getAbsorcionAcustica()+"dB");
-        System.out.println("Suelo: "+habitacion.getEnvolturaDelEspacio().getSuelo().getNombre()+"\t | Grosor: "+habitacion.getEnvolturaDelEspacio().getSuelo().getGrosor()+"cm \t | Absorcion acustica: " +habitacion.getEnvolturaDelEspacio().getSuelo().getAbsorcionAcustica()+"dB");
-        System.out.println("\n");
-    }
-    
+    } 
 }
