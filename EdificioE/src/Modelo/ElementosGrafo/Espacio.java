@@ -21,6 +21,7 @@ public class Espacio{
     protected Envoltura envolturaDelEspacio;
     protected boolean esPerimetral;
     protected String orientacionPerimetro;
+    protected int numeroEspacio;
     
     //Variables de posición en el grafo
     public int x, y;
@@ -39,11 +40,12 @@ public class Espacio{
         crearEnvoltura(esPerimetral,orientacionPerimetro);
     }
     
-    public Espacio(int x, int y, Color color, Actividad actividad) {
+    public Espacio(int x, int y, Color color, Actividad actividad, int numeroEspacio) {
         this.x = x;
         this.y = y;
         this.color = color;
         this.actividad = actividad;
+        this.numeroEspacio = numeroEspacio;
         espacioHabitacion = new ArrayList<>();
         fuentesExternas = new ArrayList<>();
     }
@@ -117,5 +119,11 @@ public class Espacio{
         return envolturaDelEspacio;
     }
 
+    public Color getColor() {
+        return color;
+    }
     
+    public int getNumeroEspacio(){
+        return numeroEspacio;
+    }
 }

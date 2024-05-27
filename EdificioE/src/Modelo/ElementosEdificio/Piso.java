@@ -2,6 +2,7 @@ package Modelo.ElementosEdificio;
 
 import Modelo.ElementosGrafo.Arista;
 import Modelo.ElementosGrafo.Espacio;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,4 +106,20 @@ public class Piso{
         return identificador;
     }
     
+    public List<String> conexionNodosRojosVerdes() {
+        List<String> rojosVerdesConexion = new ArrayList<>();
+
+        for (Arista arista : aristas) {
+            Espacio nodo1 = arista.from;
+            Espacio nodo2 = arista.to;
+
+            // Solo agregar conexiones donde el nodo1 es rojo y el nodo2 es verde
+            if (nodo1.getColor() == Color.RED && nodo2.getColor() == Color.GREEN) {
+                rojosVerdesConexion.add("Nodo " + nodo1.getNumeroEspacio() + " está conectado con Nodo " + nodo2.getNumeroEspacio() + " generando conflicto de ruido");
+            }
+        }
+
+        return rojosVerdesConexion;
+    }
+
 }

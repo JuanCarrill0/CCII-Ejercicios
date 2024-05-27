@@ -31,6 +31,7 @@ public class Controlador implements ActionListener{
         
         this.simulacion.simularPiso.addActionListener(e -> actionPerformed(e));
         this.simulacion.simularHabitacion.addActionListener(e -> actionPerformed(e));
+        this.simulacion.recomendacionesPiso.addActionListener(e -> actionPerformed(e));
     }
     
     //Método para iniciar la ventana del menú
@@ -93,8 +94,19 @@ public class Controlador implements ActionListener{
                 simulacion.setDisplayPanel(panelHabitacion);
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Ingrese un número de habitación válido");
-            }
-            
+            }          
         }
+        
+        if (e.getSource() == simulacion.recomendacionesPiso) {
+            Edificio miEdificio = this.fachada.getEdificio();
+            simulacion.boxRecomendacion.setText("Recomendaciones del piso - " + Integer.valueOf(simulacion.targetPiso.getText()) + "\n");
+            // Encontrar conexiones RED-GREEN
+            List<String> conexiones = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText()) - 1).conexionNodosRojosVerdes();
+            // Imprimir las conexiones encontradas
+            for (String conexion : conexiones) {
+                simulacion.boxRecomendacion.append(conexion + "\n");
+            }
+        }
+
     } 
 }

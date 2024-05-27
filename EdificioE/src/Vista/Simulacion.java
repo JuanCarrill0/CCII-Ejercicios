@@ -61,6 +61,9 @@ public class Simulacion extends javax.swing.JFrame {
         targetHabitacion = new javax.swing.JTextField();
         simularPiso = new javax.swing.JButton();
         SimulacionPanel = new javax.swing.JPanel();
+        recomendacionesPiso = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        boxRecomendacion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,33 +118,54 @@ public class Simulacion extends javax.swing.JFrame {
         SimulacionPanel.setLayout(SimulacionPanelLayout);
         SimulacionPanelLayout.setHorizontalGroup(
             SimulacionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
+            .addGap(0, 723, Short.MAX_VALUE)
         );
         SimulacionPanelLayout.setVerticalGroup(
             SimulacionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        recomendacionesPiso.setText("Ver recomendaciones del piso");
+        recomendacionesPiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recomendacionesPisoActionPerformed(evt);
+            }
+        });
+
+        boxRecomendacion.setColumns(20);
+        boxRecomendacion.setRows(5);
+        jScrollPane1.setViewportView(boxRecomendacion);
+
         javax.swing.GroupLayout panelPisoLayout = new javax.swing.GroupLayout(panelPiso);
         panelPiso.setLayout(panelPisoLayout);
         panelPisoLayout.setHorizontalGroup(
             panelPisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPisoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelPisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(simularHabitacion)
+                .addGroup(panelPisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPisoLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(simularPiso))
-                    .addGroup(panelPisoLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(targetPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelPisoLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(targetHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelPisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPisoLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panelPisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(simularHabitacion)
+                                    .addGroup(panelPisoLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(simularPiso))
+                                    .addGroup(panelPisoLayout.createSequentialGroup()
+                                        .addGroup(panelPisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2))
+                                        .addGap(30, 30, 30)
+                                        .addGroup(panelPisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(targetPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(targetHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(panelPisoLayout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(recomendacionesPiso)))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPisoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(SimulacionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPisoLayout.createSequentialGroup()
@@ -168,7 +192,10 @@ public class Simulacion extends javax.swing.JFrame {
                             .addComponent(targetHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(simularHabitacion)
-                        .addGap(0, 203, Short.MAX_VALUE))
+                        .addGap(41, 41, 41)
+                        .addComponent(recomendacionesPiso)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                     .addComponent(SimulacionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -218,6 +245,10 @@ public class Simulacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_targetPisoActionPerformed
 
+    private void recomendacionesPisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recomendacionesPisoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recomendacionesPisoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,11 +289,14 @@ public class Simulacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel SimulacionPanel;
+    public javax.swing.JTextArea boxRecomendacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelPiso;
     private javax.swing.JPanel panelTitulo;
+    public javax.swing.JButton recomendacionesPiso;
     public javax.swing.JButton simularHabitacion;
     public javax.swing.JButton simularPiso;
     public javax.swing.JTextField targetHabitacion;
