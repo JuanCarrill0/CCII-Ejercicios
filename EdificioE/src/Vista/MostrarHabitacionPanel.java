@@ -24,12 +24,17 @@ public class MostrarHabitacionPanel extends JPanel {
         int count = 0;
         
         for (int i =0 ; i<= habitacion.getEspacioHabitacion().size()- 1 ; i++) {
-            g.drawRect(x, y, width, height);
-            g.drawString(habitacion.getEspacioHabitacion().get(i).getFuentes().toString(), x + 5, y + 20);
+            g.setColor(Color.getHSBColor(334, 46, 85));
+            g.fillRect(x, y, width, height);
+            g.setColor(Color.black);
+            if(habitacion.getEspacioHabitacion().get(i).getFuentes().size() > 0){
+                g.drawString(habitacion.getEspacioHabitacion().get(i).getFuentes().get(0).getIdentificador(), x + 5, y + 20);
+            }
+            
             x += width + 10;
             count++;
             if (count % 5 == 0) {
-                x = 10;
+                x = 5;
                 y += height + 20;
             }
         }

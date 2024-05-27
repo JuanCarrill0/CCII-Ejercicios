@@ -65,6 +65,11 @@ public class MenuCreacion extends javax.swing.JFrame {
         jLabel2.setText("¿Cuantos pisos tiene el edificio?");
 
         cantidadPisos.setText("2");
+        cantidadPisos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantidadPisosActionPerformed(evt);
+            }
+        });
 
         Simular.setText("Simular");
 
@@ -133,6 +138,10 @@ public class MenuCreacion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cantidadPisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadPisosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cantidadPisosActionPerformed
 
     /**
      * @param args the command line arguments

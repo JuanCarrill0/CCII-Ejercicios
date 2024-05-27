@@ -92,6 +92,11 @@ public class Simulacion extends javax.swing.JFrame {
         jLabel2.setText("¿Que piso desea ver?");
 
         targetPiso.setText("2");
+        targetPiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                targetPisoActionPerformed(evt);
+            }
+        });
 
         simularHabitacion.setText("Simular Habitacion");
 
@@ -100,6 +105,11 @@ public class Simulacion extends javax.swing.JFrame {
         targetHabitacion.setText("2");
 
         simularPiso.setText("Simular Piso");
+        simularPiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simularPisoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout SimulacionPanelLayout = new javax.swing.GroupLayout(SimulacionPanel);
         SimulacionPanel.setLayout(SimulacionPanelLayout);
@@ -199,6 +209,14 @@ public class Simulacion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void simularPisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simularPisoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_simularPisoActionPerformed
+
+    private void targetPisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetPisoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_targetPisoActionPerformed
 
     /**
      * @param args the command line arguments

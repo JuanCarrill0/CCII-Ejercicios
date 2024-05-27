@@ -42,6 +42,7 @@ public class FachadaCreacionEdificio {
     private void crearEspacios(Piso piso){
         int fila = 0;
         int columna = 0;
+        Random random = new Random();
         
         for(int i = 0; i < 12; i++){
             if (i % 4 == 0 && i != 0) {
@@ -55,6 +56,7 @@ public class FachadaCreacionEdificio {
             Espacio espacio = new Espacio(100 + columna * 150, 50 + fila * 150, colorEspacio,actividadEspacio);
             System.out.println("Actividad = "+ actividadEspacio.getIdentificador()+ "- Decibeles de fuentes internas= "+actividadEspacio.calcularDecibelesTotales());
             crearMetroCuadrado(espacio, 5, 5);
+            espacio.getEspacioHabitacion().get(random.nextInt(24)).agregarFuente(actividadEspacio.fuentesInternas.get(0));
             piso.agregarEspacio(espacio);
 
             columna++;

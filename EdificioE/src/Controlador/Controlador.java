@@ -74,16 +74,27 @@ public class Controlador implements ActionListener{
         
         if (e.getSource() == simulacion.simularPiso) {
             Edificio miEdificio = this.fachada.getEdificio();
-            Piso piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText()));
-            GrafoPanel grafoPisos;
-            grafoPisos = crearGrafoPisos(piso);
-            simulacion.setDisplayPanel(grafoPisos);
+            try{
+                Piso piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText())-1);
+                GrafoPanel grafoPisos;
+                grafoPisos = crearGrafoPisos(piso);
+                simulacion.setDisplayPanel(grafoPisos);
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Ingrese un número de piso válido");
+            }
+
         }
 
         if(e.getSource() == simulacion.simularHabitacion){
             Edificio miEdificio = this.fachada.getEdificio();
-            Espacio habitacion = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText())).getNodos().get(Integer.parseInt(simulacion.targetHabitacion.getText()));
-            MostrarHabitacionPanel panelHabitacion = new MostrarHabitacionPanel(habitacion);
+            try{
+                Espacio habitacion = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText())-1).getNodos().get(Integer.parseInt(simulacion.targetHabitacion.getText()));
+                MostrarHabitacionPanel panelHabitacion = new MostrarHabitacionPanel(habitacion);
+                simulacion.setDisplayPanel(panelHabitacion);
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Ingrese un número de habitación válido");
+            }
+            
         }
     } 
 }
