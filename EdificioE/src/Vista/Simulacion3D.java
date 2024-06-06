@@ -200,7 +200,7 @@ public class Simulacion3D extends Application {
             int x = i % columnas;
             int y = -numeroDePisoInvertido;
             int z = i / columnas;
-            crearHabitacionGrafico(piso.getNodos().get(i).getColor(), x, y, z);
+            crearHabitacionGrafico(piso.getNodos().get(i).getColorGrafico(), x, y, z);
         }
     }
 

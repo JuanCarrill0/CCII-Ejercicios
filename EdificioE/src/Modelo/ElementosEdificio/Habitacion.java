@@ -9,8 +9,8 @@ public class Habitacion extends Espacio{
         super(identificador, esPerimetral, orientacionPerimetro);
     }
     
-    public Habitacion(int x, int y, Color color, Actividad actividad, int numeroEspacio){
-        super(x,y,color, actividad, numeroEspacio);
+    public Habitacion(int x, int y, Color colorEspacio, Color colorGrafico, Actividad actividad, int numeroEspacio){
+        super(x,y,colorEspacio, colorGrafico, actividad, numeroEspacio);
     }
     
 }

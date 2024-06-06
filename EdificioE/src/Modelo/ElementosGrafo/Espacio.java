@@ -120,9 +120,13 @@ public class Espacio{
     public Envoltura getEnvolturaDelEspacio() {
         return envolturaDelEspacio;
     }
-
-    public Color getColor() {
+    
+    public Color getColorEspacio(){
         return colorEspacio;
+    }
+
+    public Color getColorGrafico() {
+        return colorGrafico;
     }
     
     public int getNumeroEspacio(){
