@@ -25,7 +25,8 @@ public class Espacio{
     
     //Variables de posición en el grafo
     public int x, y;
-    public Color color;
+    public Color colorEspacio;
+    public Color colorGrafico;
     
     //Variables de actividad
     public Actividad actividad;
@@ -40,10 +41,11 @@ public class Espacio{
         crearEnvoltura(esPerimetral,orientacionPerimetro);
     }
     
-    public Espacio(int x, int y, Color color, Actividad actividad, int numeroEspacio) {
+    public Espacio(int x, int y, Color colorEspacio, Color colorGrafico, Actividad actividad, int numeroEspacio) {
         this.x = x;
         this.y = y;
-        this.color = color;
+        this.colorEspacio = colorEspacio;
+        this.colorGrafico = colorGrafico;
         this.actividad = actividad;
         this.numeroEspacio = numeroEspacio;
         espacioHabitacion = new ArrayList<>();
@@ -120,7 +122,7 @@ public class Espacio{
     }
 
     public Color getColor() {
-        return color;
+        return colorEspacio;
     }
     
     public int getNumeroEspacio(){

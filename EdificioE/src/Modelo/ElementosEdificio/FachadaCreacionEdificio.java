@@ -53,10 +53,11 @@ public class FachadaCreacionEdificio {
             Actividad actividadEspacio = elegirActividadAleatoria();
             actividadEspacio.inicializarActividad();
             //Añade el color al nodo (Habitación) dependiendo la cantidad de ruedo que exista en ella
-            Color colorEspacio = actividadEspacio.getColorPorDecibeles(actividadEspacio.calcularDecibelesTotales());
+            Color colorEspacio = actividadEspacio.getColorEspacioPorDecibeles(actividadEspacio.calcularDecibelesFuentesInternas());
+            Color colorGrafico = actividadEspacio.getColorGraficoPorDecibeles(actividadEspacio.calcularDecibelesFuentesInternas());
             //Inicializa el espacio con los valores apropiados en las posiciones del Jlabel y su color adecuado
-            Espacio espacio = new Espacio(100 + columna * 150, 50 + fila * 150, colorEspacio,actividadEspacio, i);
-            System.out.println("Actividad = "+ actividadEspacio.getIdentificador()+ "- Decibeles de fuentes internas= "+actividadEspacio.calcularDecibelesTotales());
+            Espacio espacio = new Espacio(100 + columna * 150, 50 + fila * 150, colorEspacio, colorGrafico,actividadEspacio, i);
+            System.out.println("Actividad = "+ actividadEspacio.getIdentificador()+ "- Decibeles de fuentes internas= "+actividadEspacio.calcularDecibelesFuentesInternas());
             //Cra los metros cuadrados y añade las fuentes internas con base la actividad designada
             crearMetroCuadrado(espacio, 5, 5);
             espacio.getEspacioHabitacion().get(random.nextInt(24)).agregarFuente(actividadEspacio.fuentesInternas.get(0));

@@ -67,7 +67,11 @@ public class Actividad {
     
      // Método para inicializar las fuentes internas de la actividad (como lo hicimos anteriormente)
 
-    public int calcularDecibelesTotales() {
+    public int calcularDecibelesTotales(){
+        return 0;
+    }
+    
+    public int calcularDecibelesFuentesInternas() {
         int totalDecibeles = 0;
         for (FuenteInterna fuente : fuentesInternas) {
             totalDecibeles += Math.pow(10, fuente.getFrecuencia()/10);
@@ -76,8 +80,19 @@ public class Actividad {
         totalDecibeles = (int) (10*(Math.log10(totalDecibeles)));
         return totalDecibeles;
     }
+    
+    public Color getColorEspacioPorDecibeles(int decibeles){
+        if(decibeles<45){
+            return Color.GREEN;
+        } else if(decibeles < 70){
+            return Color.YELLOW;
+        } else{
+            return Color.RED;
+        }
+        
+    }
 
-    public Color getColorPorDecibeles(int decibeles) {
+    public Color getColorGraficoPorDecibeles(int decibeles) {
         System.out.println(decibeles);
         if (tolerancia-decibeles > 10) {
             return Color.RED; // Desfase alto

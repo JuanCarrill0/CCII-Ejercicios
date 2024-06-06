@@ -21,17 +21,21 @@ public class Controlador implements ActionListener{
     
     private final MenuCreacion menuCreacion;
     private final Simulacion simulacion = new Simulacion();
+    private final Simulacion3D simulacion3d = new Simulacion3D();
     private final FachadaCreacionEdificio fachada = FachadaCreacionEdificio.getFachada();
+    private final String[] args;
     
     //Constructor controlador
-    public Controlador(MenuCreacion ventana){
-        this.menuCreacion = ventana;
+    public Controlador(MenuCreacion ventana, String[] args){
         
+        this.menuCreacion = ventana;
         this.menuCreacion.Simular.addActionListener(e -> actionPerformed(e));
         
         this.simulacion.simularPiso.addActionListener(e -> actionPerformed(e));
         this.simulacion.simularHabitacion.addActionListener(e -> actionPerformed(e));
         this.simulacion.recomendacionesPiso.addActionListener(e -> actionPerformed(e));
+        
+        this.args = args;
     }
     
     //Método para iniciar la ventana del menú
@@ -44,13 +48,27 @@ public class Controlador implements ActionListener{
     }
     
     //Métódo para iniciar la ventana de simulación
+    //Métódo para iniciar la ventana de simulación
     public void iniciarVentanaSimulacion() {
-        simulacion.setVisible(true);
-        simulacion.setEnabled(true);
-        simulacion.setLocationRelativeTo(null);
-        simulacion.setTitle("Proyecto Final - Habitabilidad Edificio");
-        simulacion.setResizable(false);
+        Edificio miEdificioGrafico = this.fachada.getEdificio();
+        simulacion3d.setEdificio(miEdificioGrafico);
+
+        Thread simulacionThread = new Thread(() -> {
+            simulacion.setVisible(true);
+            simulacion.setEnabled(true);
+            simulacion.setLocationRelativeTo(null);
+            simulacion.setTitle("Proyecto Final - Habitabilidad Edificio");
+            simulacion.setResizable(false);
+        });
+
+        Thread simulacion3dThread = new Thread(() -> {
+            simulacion3d.iniciarSimulacion3D(args);
+        });
+
+        simulacionThread.start();
+        simulacion3dThread.start();
     }
+
     
     //Método para inicializar el edificio
     public void crearEdificio(int cantidadPisos){
