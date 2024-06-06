@@ -35,30 +35,30 @@ public class Actividad {
                 this.tolerancia = 120;
             }
             case "Oficina" -> {
-                fuentesInternas.add(new FuenteInterna("Impresora", 50, 1800, "Trabajo")); // Nivel medio de ruido
-                fuentesInternas.add(new FuenteInterna("Teclado", 40, 14400, "Trabajo")); // Nivel bajo de ruido
-                fuentesInternas.add(new FuenteInterna("Teléfono", 60, 7200, "Trabajo")); // Nivel medio de ruido
+                fuentesInternas.add(new FuenteInterna("Impresora", 20, 1800, "Trabajo")); // Nivel medio de ruido
+                fuentesInternas.add(new FuenteInterna("Teclado", 10, 14400, "Trabajo")); // Nivel bajo de ruido
+                fuentesInternas.add(new FuenteInterna("Teléfono", 15, 7200, "Trabajo")); // Nivel medio de ruido
                 this.tolerancia = 65;
             }
             case "Cocina" -> {
-                fuentesInternas.add(new FuenteInterna("Extractor", 70, 1800, "Cocina")); // Nivel alto de ruido
-                fuentesInternas.add(new FuenteInterna("Refrigerador", 50, 7200, "Cocina")); // Nivel medio de ruido
-                fuentesInternas.add(new FuenteInterna("Licuadora", 80, 1200, "Cocina")); // Nivel alto de ruido
+                fuentesInternas.add(new FuenteInterna("Extractor", 10, 1800, "Cocina")); // Nivel alto de ruido
+                fuentesInternas.add(new FuenteInterna("Refrigerador", 15, 7200, "Cocina")); // Nivel medio de ruido
+                fuentesInternas.add(new FuenteInterna("Licuadora", 20, 1200, "Cocina")); // Nivel alto de ruido
                 this.tolerancia = 90;
             }
             case "Dormitorio" -> {
-                fuentesInternas.add(new FuenteInterna("Ventilador", 30, 28800, "Descanso")); // Nivel bajo de ruido
-                fuentesInternas.add(new FuenteInterna("Reloj", 20, 43200, "Descanso")); // Nivel bajo de ruido
+                fuentesInternas.add(new FuenteInterna("Ventilador", 10, 28800, "Descanso")); // Nivel bajo de ruido
+                fuentesInternas.add(new FuenteInterna("Reloj", 5, 43200, "Descanso")); // Nivel bajo de ruido
                 this.tolerancia = 35;
             }
             case "Gimnasio" -> {
-                fuentesInternas.add(new FuenteInterna("Cinta de correr", 90, 3600, "Ejercicio")); // Nivel alto de ruido
-                fuentesInternas.add(new FuenteInterna("Pesas", 70, 5400, "Ejercicio")); // Nivel alto de ruido
+                fuentesInternas.add(new FuenteInterna("Cinta de correr", 25, 3600, "Ejercicio")); // Nivel alto de ruido
+                fuentesInternas.add(new FuenteInterna("Pesas", 30, 5400, "Ejercicio")); // Nivel alto de ruido
                 this.tolerancia = 100;
             }
             case "Biblioteca" -> {
-                fuentesInternas.add(new FuenteInterna("Página de libro", 30, 28800, "Estudio")); // Nivel bajo de ruido
-                fuentesInternas.add(new FuenteInterna("Tos ocasional", 40, 14400, "Estudio")); // Nivel bajo de ruido
+                fuentesInternas.add(new FuenteInterna("Página de libro", 5, 28800, "Estudio")); // Nivel bajo de ruido
+                fuentesInternas.add(new FuenteInterna("Tos ocasional", 5, 14400, "Estudio")); // Nivel bajo de ruido
                 this.tolerancia = 50;
             }
             default -> System.out.println("Identificador de actividad no validado");
@@ -66,40 +66,37 @@ public class Actividad {
     }
     
      // Método para inicializar las fuentes internas de la actividad (como lo hicimos anteriormente)
-
-    public int calcularDecibelesTotales(){
-        return 0;
-    }
     
     public int calcularDecibelesFuentesInternas() {
         int totalDecibeles = 0;
         for (FuenteInterna fuente : fuentesInternas) {
-            totalDecibeles += Math.pow(10, fuente.getFrecuencia()/10);
+            //Formula de decibeles en el espacio - heuristica del documento
+            totalDecibeles += (double) (10*(Math.log10(fuente.getFrecuencia())));
         }
         
-        totalDecibeles = (int) (10*(Math.log10(totalDecibeles)));
         return totalDecibeles;
     }
     
     public Color getColorEspacioPorDecibeles(int decibeles){
+        //Control de decibeles por fuentes internas
         if(decibeles<45){
-            return Color.GREEN;
-        } else if(decibeles < 70){
+            return Color.RED;
+        } else if(decibeles < 100){
             return Color.YELLOW;
         } else{
-            return Color.RED;
+            return Color.GREEN;
         }
         
     }
 
     public Color getColorGraficoPorDecibeles(int decibeles) {
-        System.out.println(decibeles);
-        if (tolerancia-decibeles > 10) {
-            return Color.RED; // Desfase alto
-        } else if (tolerancia - decibeles > 5) {
-            return Color.YELLOW; // Desfase medio
-        } else {
-            return Color.GREEN; // Desfase bajo o sin desfase
+        //Control de decibeles por fuentes internas
+        if(decibeles<45){
+            return Color.GREEN;
+        } else if(decibeles < 100){
+            return Color.YELLOW;
+        } else{
+            return Color.RED;
         }
     }
     

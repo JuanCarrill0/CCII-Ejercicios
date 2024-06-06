@@ -11,7 +11,7 @@ public class Envoltura{
     private MaterialEnvolvente suelo;
     
     
-    public Envoltura(String identificador, MaterialEnvolvente paredDerecha, MaterialEnvolvente paredIzquierda, MaterialEnvolvente paredFrontal, MaterialEnvolvente paredTrasera, MaterialEnvolvente techo, MaterialEnvolvente suelo){
+   public Envoltura(String identificador, MaterialEnvolvente paredDerecha, MaterialEnvolvente paredIzquierda, MaterialEnvolvente paredFrontal, MaterialEnvolvente paredTrasera, MaterialEnvolvente techo, MaterialEnvolvente suelo){
         this.identificador = identificador;
         this.paredDerecha = paredDerecha;
         this.paredIzquierda = paredIzquierda;
@@ -21,8 +21,20 @@ public class Envoltura{
         this.suelo = suelo;
     }
     
-    public int calcularReverberacion(){
-        return 0;
+    public double calcularReverberacion() {
+        double absorcionTotal = calcularAbsorcionTotal();
+        return 0.161 * 15 / absorcionTotal;
+    }
+
+    private double calcularAbsorcionTotal() {
+        double absorcionTotal = 0;
+        absorcionTotal += paredDerecha.getGrosor() * paredDerecha.getAbsorcionAcustica();
+        absorcionTotal += paredIzquierda.getGrosor() * paredIzquierda.getAbsorcionAcustica();
+        absorcionTotal += paredFrontal.getGrosor() * paredFrontal.getAbsorcionAcustica();
+        absorcionTotal += paredTrasera.getGrosor() * paredTrasera.getAbsorcionAcustica();
+        absorcionTotal += techo.getGrosor() * techo.getAbsorcionAcustica();
+        absorcionTotal += suelo.getGrosor() * suelo.getAbsorcionAcustica();
+        return absorcionTotal;
     }
     
     public String getIdentificador() {

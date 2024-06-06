@@ -5,17 +5,13 @@ import Modelo.ElementosEdificio.Edificio;
 import Modelo.ElementosEdificio.Piso;
 import Modelo.ElementosEdificio.FachadaCreacionEdificio;
 import Modelo.ElementosGrafo.GrafoPanel;
-import Modelo.ElementosGrafo.Arista;
 
 import Vista.*;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+
 
 public class Controlador implements ActionListener{
     
@@ -34,6 +30,7 @@ public class Controlador implements ActionListener{
         this.simulacion.simularPiso.addActionListener(e -> actionPerformed(e));
         this.simulacion.simularHabitacion.addActionListener(e -> actionPerformed(e));
         this.simulacion.recomendacionesPiso.addActionListener(e -> actionPerformed(e));
+        this.simulacion.solucionarPiso.addActionListener(e -> actionPerformed(e));
         
         this.args = args;
     }
@@ -83,6 +80,8 @@ public class Controlador implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        //Condicional que ejecuta la ventana de simulación
         if(e.getSource() == menuCreacion.Simular){
             //Inicialización de los valores en memoria
             this.crearEdificio(Integer.parseInt(menuCreacion.cantidadPisos.getText()));
@@ -91,10 +90,13 @@ public class Controlador implements ActionListener{
             this.iniciarVentanaSimulacion();
         }
         
+        //Condicional que ejecuta el dibujado del grafo 2d del piso a simular
         if (e.getSource() == simulacion.simularPiso) {
             Edificio miEdificio = this.fachada.getEdificio();
             try{
+                //Obtener el piso seleccionado
                 Piso piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText())-1);
+                //Inicializar el Jpanel con el grafo del piso
                 GrafoPanel grafoPisos;
                 grafoPisos = crearGrafoPisos(piso);
                 simulacion.setDisplayPanel(grafoPisos);
@@ -103,7 +105,7 @@ public class Controlador implements ActionListener{
             }
 
         }
-
+        //Condicional que ejecuta la simulación por metro cuadrado de las habitaciones del piso
         if(e.getSource() == simulacion.simularHabitacion){
             Edificio miEdificio = this.fachada.getEdificio();
             try{
@@ -115,6 +117,7 @@ public class Controlador implements ActionListener{
             }          
         }
         
+        //Condicional que muestra en la caja de texto las recomendaciones del piso seleccionado
         if (e.getSource() == simulacion.recomendacionesPiso) {
             Edificio miEdificio = this.fachada.getEdificio();
             simulacion.boxRecomendacion.setText("Recomendaciones del piso - " + Integer.valueOf(simulacion.targetPiso.getText()) + "\n");
@@ -124,6 +127,14 @@ public class Controlador implements ActionListener{
             for (String conexion : conexiones) {
                 simulacion.boxRecomendacion.append(conexion + "\n");
             }
+        }
+        
+        //Condicional que ejecuta el algoritmo para cambiar el grafo del piso seleccionado según las recomendaciones de conexión
+        if(e.getSource() == simulacion.solucionarPiso){
+            Edificio miEdificio = this.fachada.getEdificio();
+            simulacion.boxRecomendacion.setText("Solución del piso - " + Integer.valueOf(simulacion.targetPiso.getText()) + "\n");
+            Piso piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText()) - 1);
+
         }
 
     } 

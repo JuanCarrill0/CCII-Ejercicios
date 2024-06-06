@@ -36,7 +36,7 @@ public class GrafoPanel extends JPanel {
         // Dibujar nodos
         int radius = 20;
         for (Espacio node : nodes) {
-            g2d.setColor(node.colorGrafico);
+            g2d.setColor(node.colorEspacio);
             g2d.fillOval(node.x - radius, node.y - radius, 2 * radius, 2 * radius);
         }
     }

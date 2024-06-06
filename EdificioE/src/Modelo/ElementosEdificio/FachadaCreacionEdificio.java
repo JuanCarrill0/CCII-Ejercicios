@@ -44,6 +44,7 @@ public class FachadaCreacionEdificio {
         int columna = 0;
         Random random = new Random();
         
+        System.out.println("------ Piso "+piso.getIdentificador()+"------");
         for(int i = 0; i < 12; i++){
             if (i % 4 == 0 && i != 0) {
                 fila++;
@@ -57,18 +58,24 @@ public class FachadaCreacionEdificio {
             Color colorGrafico = actividadEspacio.getColorGraficoPorDecibeles(actividadEspacio.calcularDecibelesFuentesInternas());
             //Inicializa el espacio con los valores apropiados en las posiciones del Jlabel y su color adecuado
             Espacio espacio = new Espacio(100 + columna * 150, 50 + fila * 150, colorEspacio, colorGrafico,actividadEspacio, i);
-            System.out.println("Actividad = "+ actividadEspacio.getIdentificador()+ "- Decibeles de fuentes internas= "+actividadEspacio.calcularDecibelesFuentesInternas());
-            //Cra los metros cuadrados y añade las fuentes internas con base la actividad designada
+            //Crea los metros cuadrados y añade las fuentes internas con base la actividad designada
             crearMetroCuadrado(espacio, 5, 5);
             espacio.getEspacioHabitacion().get(random.nextInt(24)).agregarFuente(actividadEspacio.fuentesInternas.get(0));
+            //Antes de agregar espacio, modificados el color del espacio al hacer analisis de tolerancia y habitabilidad por fuentes internas y externas
+            espacio.calcularTolerancia();
+            espacio.setColorGrafico(espacio.calcularHabitabilidad());
             piso.agregarEspacio(espacio);
-
+            //Muestro de consola de la información por espacio del ruido
+            System.out.println("Habitacion "+ i + " con actividad = "+ actividadEspacio.getIdentificador() +" y tolerancia de ruido de= "+ espacio.getTolerancia());
+            
             columna++;
         }
         //Dados los nodos creados, añade las aristas correspondientes
         piso.agregarAristas();
     }
     
+    
+    //Método para elegir la actividad de forma aleatoria en el espacio
     public static Actividad elegirActividadAleatoria() {
         String[] actividades = {"Fiestas", "Oficina", "Cocina", "Dormitorio", "Gimnasio", "Biblioteca"}; // Todas las actividades disponibles
         Random random = new Random();
