@@ -4,6 +4,7 @@ import Modelo.ElementosGrafo.Espacio;
 import Modelo.ElementosEdificio.Edificio;
 import Modelo.ElementosEdificio.Piso;
 import Modelo.ElementosEdificio.FachadaCreacionEdificio;
+import Modelo.ElementosEdificio.GestorHabitabilidad;
 import Modelo.ElementosGrafo.GrafoPanel;
 
 import Vista.*;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Controlador implements ActionListener{
@@ -20,6 +23,7 @@ public class Controlador implements ActionListener{
     private final Simulacion3D simulacion3d = new Simulacion3D();
     private final FachadaCreacionEdificio fachada = FachadaCreacionEdificio.getFachada();
     private final String[] args;
+    private GestorHabitabilidad gestor;
     
     //Constructor controlador
     public Controlador(MenuCreacion ventana, String[] args){
@@ -86,6 +90,7 @@ public class Controlador implements ActionListener{
             //Inicialización de los valores en memoria
             this.crearEdificio(Integer.parseInt(menuCreacion.cantidadPisos.getText()));
             //Cerrar ventana de creación
+            gestor = new GestorHabitabilidad(fachada.getEdificio());
             menuCreacion.setVisible(false);
             this.iniciarVentanaSimulacion();
         }
@@ -93,6 +98,7 @@ public class Controlador implements ActionListener{
         //Condicional que ejecuta el dibujado del grafo 2d del piso a simular
         if (e.getSource() == simulacion.simularPiso) {
             Edificio miEdificio = this.fachada.getEdificio();
+            
             try{
                 //Obtener el piso seleccionado
                 Piso piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText())-1);
@@ -131,10 +137,18 @@ public class Controlador implements ActionListener{
         
         //Condicional que ejecuta el algoritmo para cambiar el grafo del piso seleccionado según las recomendaciones de conexión
         if(e.getSource() == simulacion.solucionarPiso){
-            Edificio miEdificio = this.fachada.getEdificio();
+            
             simulacion.boxRecomendacion.setText("Solución del piso - " + Integer.valueOf(simulacion.targetPiso.getText()) + "\n");
-            Piso piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText()) - 1);
-
+            try {
+                //Piso piso = miEdificio.getPisos().get(Integer.parseInt(simulacion.targetPiso.getText()) - 1);
+                simulacion3d.stop();
+            } catch (Exception ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(gestor.getEspaciosConflictivos());
+            gestor.encontrarEspaciosConflictivos();
+            gestor.cambiarEspaciosConflictivos();
+            this.fachada.solucionarHabitabilidad();
         }
 
     } 

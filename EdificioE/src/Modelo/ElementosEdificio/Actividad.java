@@ -80,11 +80,11 @@ public class Actividad {
     public Color getColorEspacioPorDecibeles(int decibeles){
         //Control de decibeles por fuentes internas
         if(decibeles<45){
-            return Color.RED;
+            return Color.GREEN;
         } else if(decibeles < 100){
             return Color.YELLOW;
         } else{
-            return Color.GREEN;
+            return Color.RED;
         }
         
     }

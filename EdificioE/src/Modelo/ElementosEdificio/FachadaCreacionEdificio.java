@@ -74,6 +74,14 @@ public class FachadaCreacionEdificio {
         piso.agregarAristas();
     }
     
+    public void solucionarHabitabilidad(){
+        for(int i=0; i<edificio.getPisos().size(); i++){
+            for(int j=0; j<edificio.getPisos().get(i).getNodos().size(); j++){
+                edificio.getPisos().get(i).getNodos().get(j).setColorGrafico(Color.GREEN);
+            }
+        }
+    }
+    
     
     //Método para elegir la actividad de forma aleatoria en el espacio
     public static Actividad elegirActividadAleatoria() {
@@ -95,6 +103,10 @@ public class FachadaCreacionEdificio {
     
     public Edificio getEdificio(){
         return edificio;
+    }
+    
+    public void setEdificio(Edificio edificio){
+        this.edificio = edificio;
     }
     
 }

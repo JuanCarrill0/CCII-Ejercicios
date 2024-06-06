@@ -14,5 +14,6 @@ public class Main{
         Controlador miControlador = new Controlador(ventana,args);
 
         miControlador.iniciar();  
+
     }
 }

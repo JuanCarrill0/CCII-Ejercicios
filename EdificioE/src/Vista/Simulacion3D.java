@@ -198,6 +198,18 @@ public class Simulacion3D extends Application {
             crearHabitacionGrafico(piso.getNodos().get(i).getColorGrafico(), x, y, z);
         }
     }
+    
+    public void crearPisoGraficoo(Piso piso, int numeroDePisoInvertido) {
+        int columnas = 4;
+        int filas = 3;
+
+        for (int i = 0; i < piso.getNodos().size(); i++) {
+            int x = i % columnas;
+            int y = -numeroDePisoInvertido;
+            int z = i / columnas;
+            crearHabitacionGrafico(piso.getNodos().get(i).getColorGrafico(), x, y, z);
+        }
+    }
 
     public void crearHabitacionGrafico(java.awt.Color color, int posicionX, int posicionY, int posicionZ) {
         crearNodo(color.getRed(), color.getGreen(), color.getBlue(), (double) posicionX, (double) posicionY, (double) posicionZ);
@@ -210,5 +222,6 @@ public class Simulacion3D extends Application {
     public void setEdificio(Edificio edificio) {
         this.edificio = edificio;
     }
-
+    
+    
 }

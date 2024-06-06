@@ -98,6 +98,10 @@ public class Piso{
         return nodos;
     }
     
+    public void setNodo(int numeroEspacio,Espacio espacio){
+        nodos.set(numeroEspacio, espacio);
+    }
+    
     public List<Arista> getAristas(){
         return aristas;
     }
@@ -113,7 +117,7 @@ public class Piso{
             Espacio nodo1 = arista.from;
             Espacio nodo2 = arista.to;
 
-            if (nodo1.getColorEspacio() == Color.RED && nodo2.getColorEspacio() == Color.GREEN) {
+            if (nodo1.getColorGrafico() == Color.RED && nodo2.getColorGrafico() == Color.GREEN) {
                 rojosVerdesConexion.add("Nodo " + nodo1.getNumeroEspacio() + " está conectado con Nodo " + nodo2.getNumeroEspacio() + " generando conflicto de ruido");
             }
         }
